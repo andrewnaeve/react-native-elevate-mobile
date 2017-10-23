@@ -1,6 +1,7 @@
 const initialState = {
 	assetsLoaded: {},
-	appIsReady: {}
+	appIsReady: {},
+	cart: {}
 };
 
 export default initialState;

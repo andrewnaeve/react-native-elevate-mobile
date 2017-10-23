@@ -4,6 +4,9 @@ import { TouchableOpacity, StyleSheet, View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 
 class Linea extends Component {
+	static navigationOptions = ({ navigation }) => ({
+		title: `Elevate`
+	});
 	constructor() {
 		super();
 		this.linea = new LineaPro();

@@ -32,7 +32,7 @@ class Home extends Component {
 
 	handleElevatePress = () => {
 		Animated.timing(this.animateElevate, {
-			toValue: 0.75,
+			toValue: 0.85,
 			duration: 100,
 			easing: Easing.ease
 		}).start();
@@ -43,7 +43,7 @@ class Home extends Component {
 			toValue: 1,
 			duration: 100,
 			easing: Easing.ease
-		}).start(() => this.props.navigation.navigate('Linea'));
+		}).start(() => this.props.navigation.navigate('Elevate'));
 	};
 
 	handlePulseLoad = () => {
@@ -52,7 +52,7 @@ class Home extends Component {
 
 	handlePulsePress = () => {
 		Animated.timing(this.animatePulse, {
-			toValue: 0.75,
+			toValue: 0.85,
 			duration: 100,
 			easing: Easing.ease
 		}).start();
