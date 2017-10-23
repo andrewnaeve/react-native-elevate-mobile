@@ -15,36 +15,33 @@ import { appReady } from '../../actions/appReady';
 import { height, width } from '../utils/styleConstants';
 import TicketStub from './TicketStub';
 import { PricingCard } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 
 class ElevateStore extends Component {
 	constructor() {
 		super();
 		this.state = {
-			quantity: 0
+			total: 0
 		};
 		this.ticketTypes = ['General Admission', 'Reserved'];
 	}
-	increment = () => {
-		this.setState((prevState, props) => ({
-			quantity: prevState.quantity + 1
+	addCheckoutTotal = ticketPrice => {
+		this.setState(prevState => ({
+			total: prevState.total + ticketPrice
 		}));
 	};
-	decrement = () => {
-		this.state.quantity > 0 &&
-			this.setState((prevState, props) => ({
-				quantity: prevState.quantity - 1
-			}));
+	subtractCheckoutTotal = ticketPrice => {
+		this.setState(prevState => ({
+			total: prevState.total - ticketPrice
+		}));
 	};
 	_renderItem = data => {
-		const { quantity } = this.state;
 		const { item } = data;
-		console.log(item);
 		return (
 			<TicketStub
 				title={item.key}
-				increment={this.increment}
-				decrement={this.decrement}
-				quantity={quantity}
+				addCheckoutTotal={this.addCheckoutTotal}
+				subtractCheckoutTotal={this.subtractCheckoutTotal}
 			/>
 		);
 	};
@@ -54,9 +51,27 @@ class ElevateStore extends Component {
 		});
 	};
 	render() {
+		const total = this.state.total.toFixed(2);
+		const totalString = `Checkout for $${total}`;
 		return (
 			<View style={styles.container}>
-				<FlatList data={this._types()} renderItem={this._renderItem} />
+				<View style={styles.list}>
+					<FlatList
+						data={this._types()}
+						renderItem={this._renderItem}
+					/>
+				</View>
+				<Button
+					raised
+					large
+					buttonStyle={{
+						backgroundColor: '#85bb65',
+						borderRadius: 10
+					}}
+					icon={{ name: 'monetization-on' }}
+					title={totalString}
+					style={styles.checkout}
+				/>
 			</View>
 		);
 	}
@@ -67,6 +82,14 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		backgroundColor: 'white'
+	},
+	list: {
+		flex: 1,
+		marginTop: 30
+	},
+	checkout: {
+		marginBottom: 20,
+		width: width * 0.8
 	}
 });
 

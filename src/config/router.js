@@ -5,11 +5,16 @@ import PulseReader from '../components/PulseReader/PulseReader';
 import Linea from '../components/Linea/Linea';
 import ElevateStore from '../components/Elevate/ElevateStore';
 
-const Elevate = StackNavigator({
-	Elevation: {
-		screen: ElevateStore
+const Elevate = StackNavigator(
+	{
+		Elevation: {
+			screen: ElevateStore
+		}
+	},
+	{
+		headerMode: 'none'
 	}
-});
+);
 
 export const HomeScreen = StackNavigator(
 	{
