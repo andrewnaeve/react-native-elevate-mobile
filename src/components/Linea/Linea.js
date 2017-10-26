@@ -10,28 +10,20 @@ class Linea extends Component {
 	constructor() {
 		super();
 		this.linea = new LineaPro();
-		this.connectionStateListener = this.connectionStateListener.bind(this);
-		this.rfCardInfoListener = this.rfCardInfoListener.bind(this);
-		this.debugListener = this.debugListener.bind(this);
-		this.magneticInfoListener = this.magneticInfoListener.bind(this);
-		this.activateScanner = this.activateScanner.bind(this);
 	}
 
 	componentDidMount() {
 		this.linea.initialize();
 		this.linea.addConnectionStateListener(this.connectionStateListener);
-		this.linea.addDebugListener(this.debugListener);
-		this.linea.addRfCardListener(this.rfCardInfoListener);
-		this.linea.addMagneticInfoListener(this.magneticInfoListener);
 	}
 
-	activateScanner() {
-		this.connectionStateListener();
-	}
+	startListener = () => {
+		console.log('done');
+	};
 
-	connectionStateListener(data) {
+	connectionStateListener = data => {
 		console.log('connection state listener', data);
-	}
+	};
 
 	rfCardInfoListener(data) {}
 
@@ -47,6 +39,21 @@ class Linea extends Component {
 					raised
 					large
 					buttonStyle={{
+						backgroundColor: '#ffcc88',
+						borderRadius: 10
+					}}
+					style={styles.scanButton}
+					icon={{
+						name: 'settings-remote',
+						type: 'MaterialIcons'
+					}}
+					title="Activate Callback"
+					onPress={this.connectionStateListener}
+				/>
+				<Button
+					raised
+					large
+					buttonStyle={{
 						backgroundColor: '#ffcc66',
 						borderRadius: 10
 					}}
@@ -55,8 +62,8 @@ class Linea extends Component {
 						name: 'settings-remote',
 						type: 'MaterialIcons'
 					}}
-					title="Activate Card Reader"
-					onPress={this.activateScanner}
+					title="Start Listener"
+					onPress={this.startListener}
 				/>
 			</View>
 		);

@@ -22,7 +22,7 @@ export const HomeScreen = StackNavigator(
 			screen: Home
 		},
 		Elevate: {
-			screen: Elevate
+			screen: Linea
 		},
 		PulseReader: {
 			screen: PulseReader
