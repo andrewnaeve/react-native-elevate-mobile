@@ -1,28 +1,44 @@
 import LineaPro from 'react-native-linea';
 import React, { Component } from 'react';
-import { TouchableOpacity, StyleSheet, View, Text } from 'react-native';
+import {
+	TouchableOpacity,
+	StyleSheet,
+	View,
+	Text,
+	AlertIOS
+} from 'react-native';
 import { Button } from 'react-native-elements';
 
 class Linea extends Component {
-	static navigationOptions = ({ navigation }) => ({
-		title: `Elevate`
-	});
 	constructor() {
 		super();
 		this.linea = new LineaPro();
-	}
-
-	componentDidMount() {
-		this.linea.initialize();
 		this.linea.addConnectionStateListener(this.connectionStateListener);
+		this.linea.addDebugListener(this.debugCallback);
 	}
 
-	startListener = () => {
-		console.log('done');
+	componentWillUnmount() {
+		const {
+			navigation: { state: { params: { resetDisabled } } }
+		} = this.props;
+		resetDisabled();
+	}
+
+	connect = () => {
+		this.linea.initialize();
 	};
 
 	connectionStateListener = data => {
-		console.log('connection state listener', data);
+		console.log('connection state listenerz', data);
+	};
+
+	debugCallback = bug => {
+		console.log('bug', bug);
+	};
+
+	add = () => {
+		console.log('scan');
+		this.linea.scanRf();
 	};
 
 	rfCardInfoListener(data) {}
@@ -47,8 +63,8 @@ class Linea extends Component {
 						name: 'settings-remote',
 						type: 'MaterialIcons'
 					}}
-					title="Activate Callback"
-					onPress={this.connectionStateListener}
+					title="connect"
+					onPress={this.connect}
 				/>
 				<Button
 					raised
@@ -62,8 +78,8 @@ class Linea extends Component {
 						name: 'settings-remote',
 						type: 'MaterialIcons'
 					}}
-					title="Start Listener"
-					onPress={this.startListener}
+					title="Add"
+					onPress={this.add}
 				/>
 			</View>
 		);

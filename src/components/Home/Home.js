@@ -15,6 +15,9 @@ import { appReady } from '../../actions/appReady';
 class Home extends Component {
 	constructor() {
 		super();
+		this.state = {
+			disabled: false
+		};
 		this.animateElevate = new Animated.Value(1);
 		this.animatePulse = new Animated.Value(1);
 		this.opaqueAnimation = new Animated.Value(1);
@@ -39,11 +42,16 @@ class Home extends Component {
 	};
 
 	handleElevateRelease = () => {
+		this.disableButton();
 		Animated.timing(this.animateElevate, {
 			toValue: 1,
 			duration: 100,
 			easing: Easing.ease
-		}).start(() => this.props.navigation.navigate('Elevate'));
+		}).start(() =>
+			this.props.navigation.navigate('Elevate', {
+				resetDisabled: this.resetDisabled
+			})
+		);
 	};
 
 	handlePulseLoad = () => {
@@ -58,12 +66,30 @@ class Home extends Component {
 		}).start();
 	};
 
+	resetDisabled = () => {
+		console.log('reset');
+		this.setState({
+			disabled: false
+		});
+	};
+
+	disableButton = () => {
+		this.setState({
+			disabled: true
+		});
+	};
+
 	handlePulseRelease = () => {
+		this.disableButton();
 		Animated.timing(this.animatePulse, {
 			toValue: 1,
 			duration: 100,
 			easing: Easing.ease
-		}).start(() => this.props.navigation.navigate('PulseReader'));
+		}).start(() =>
+			this.props.navigation.navigate('PulseReader', {
+				resetDisabled: this.resetDisabled
+			})
+		);
 	};
 
 	render() {
@@ -75,6 +101,7 @@ class Home extends Component {
 			inputRange: [0, 1],
 			outputRange: [0, 1]
 		});
+		const { disabled } = this.state;
 
 		return (
 			<View style={styles.container}>
@@ -82,6 +109,7 @@ class Home extends Component {
 					<TouchableWithoutFeedback
 						onPressIn={this.handleElevatePress}
 						onPressOut={this.handleElevateRelease}
+						disabled={disabled}
 					>
 						<Animated.Image
 							source={require('../../img/elevate.png')}
@@ -96,6 +124,7 @@ class Home extends Component {
 					<TouchableWithoutFeedback
 						onPressIn={this.handlePulsePress}
 						onPressOut={this.handlePulseRelease}
+						disabled={disabled}
 					>
 						<Animated.Image
 							source={require('../../img/pulse.png')}

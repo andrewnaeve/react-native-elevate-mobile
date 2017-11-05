@@ -25,6 +25,14 @@ class ElevateStore extends Component {
 		};
 		this.ticketTypes = ['General Admission', 'Reserved'];
 	}
+
+	componentWillUnmount() {
+		const {
+			navigation: { state: { params: { resetDisabled } } }
+		} = this.props;
+		resetDisabled();
+	}
+
 	addCheckoutTotal = ticketPrice => {
 		this.setState(prevState => ({
 			total: prevState.total + ticketPrice
