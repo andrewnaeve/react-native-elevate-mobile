@@ -67,7 +67,6 @@ class Home extends Component {
 	};
 
 	resetDisabled = () => {
-		console.log('reset');
 		this.setState({
 			disabled: false
 		});
