@@ -19,9 +19,9 @@ class Linea extends Component {
 
 	componentWillUnmount() {
 		const {
-			navigation: { state: { params: { resetDisabled } } }
+			navigation: { state: { params: { resetPressCount } } }
 		} = this.props;
-		resetDisabled();
+		resetPressCount();
 	}
 
 	connect = () => {

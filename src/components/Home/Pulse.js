@@ -6,27 +6,22 @@ import {
 	Easing,
 	StyleSheet
 } from 'react-native';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { unloadAsset } from '../../actions/unloadAsset';
-import { assetReady } from '../../actions/assetReady';
-import { appReady } from '../../actions/appReady';
 
 class Pulse extends Component {
 	constructor() {
 		super();
 		this.state = {
-			disabled: false
+			presses: 0
 		};
 		this.animatePulse = new Animated.Value(1);
 	}
 
 	componentDidUpdate() {
-		const { disabled } = this.state;
-		const { resetDisabled, navigation: { navigate } } = this.props;
-		disabled &&
-			navigate('PulseReader', {
-				resetDisabled: resetDisabled
+		const { presses } = this.state;
+		const { navigation: { navigate } } = this.props;
+		presses === 1 &&
+			navigate('Pulse', {
+				resetPressCount: this.resetPressCount
 			});
 	}
 
@@ -39,12 +34,11 @@ class Pulse extends Component {
 	};
 
 	handlePulseRelease = () => {
-		const { disableButton } = this.props;
 		Animated.timing(this.animatePulse, {
 			toValue: 1,
 			duration: 100,
 			easing: Easing.ease
-		}).start(() => disableButton());
+		}).start(() => this.navigateOnFirstPressOnly());
 	};
 
 	handleLoad = () => {
@@ -52,20 +46,28 @@ class Pulse extends Component {
 		handleLoad();
 	};
 
+	resetPressCount = () => {
+		this.setState({
+			presses: 0
+		});
+	};
+
+	navigateOnFirstPressOnly = () => {
+		this.setState((prevState, props) => ({
+			presses: prevState.presses + 1
+		}));
+	};
+
 	render() {
 		const animatePulse = this.animatePulse.interpolate({
 			inputRange: [0, 1],
 			outputRange: [0, 1]
 		});
-		const { handleLoad } = this.props;
-		const { disabled } = this.state;
-
 		return (
 			<View style={styles.pulse}>
 				<TouchableWithoutFeedback
 					onPressIn={this.handlePulsePress}
 					onPressOut={this.handlePulseRelease}
-					disable={disabled}
 				>
 					<Animated.Image
 						source={require('../../img/pulse.png')}

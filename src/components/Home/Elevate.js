@@ -11,20 +11,18 @@ class Elevate extends Component {
 	constructor() {
 		super();
 		this.state = {
-			disabled: false
+			presses: 0
 		};
 		this.animateElevate = new Animated.Value(1);
 	}
 
 	componentDidUpdate() {
-		const { disabled } = this.state;
-		const { resetDisabled, navigation: { navigate } } = this.props;
-		if (this.state.disabled === true) {
-			console.log('the button is disabled');
+		const { presses } = this.state;
+		const { navigation: { navigate } } = this.props;
+		presses === 1 &&
 			navigate('Elevate', {
-				resetDisabled: this.resetDisabled
+				resetPressCount: this.resetPressCount
 			});
-		}
 	}
 
 	handleElevatePress = () => {
@@ -36,12 +34,11 @@ class Elevate extends Component {
 	};
 
 	handleElevateRelease = () => {
-		const { disableButton } = this.props;
 		Animated.timing(this.animateElevate, {
 			toValue: 1,
 			duration: 100,
 			easing: Easing.ease
-		}).start(() => this.disableButton());
+		}).start(() => this.navigateOnFirstPressOnly());
 	};
 
 	handleLoad = () => {
@@ -49,16 +46,16 @@ class Elevate extends Component {
 		handleLoad();
 	};
 
-	resetDisabled = () => {
+	resetPressCount = () => {
 		this.setState({
-			disabled: false
+			presses: 0
 		});
 	};
 
-	disableButton = () => {
-		this.setState({
-			disabled: true
-		});
+	navigateOnFirstPressOnly = () => {
+		this.setState((prevState, props) => ({
+			presses: prevState.presses + 1
+		}));
 	};
 
 	render() {
@@ -66,15 +63,11 @@ class Elevate extends Component {
 			inputRange: [0, 1],
 			outputRange: [0, 1]
 		});
-		const { handleLoad } = this.props;
-		const { disabled } = this.state;
-
 		return (
 			<View style={styles.elevate}>
 				<TouchableWithoutFeedback
 					onPressIn={this.handleElevatePress}
 					onPressOut={this.handleElevateRelease}
-					disabled={disabled}
 				>
 					<Animated.Image
 						source={require('../../img/elevate.png')}

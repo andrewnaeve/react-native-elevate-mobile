@@ -19,9 +19,9 @@ export default class PulseReader extends Component {
 
 	componentWillUnmount() {
 		const {
-			navigation: { state: { params: { resetDisabled } } }
+			navigation: { state: { params: { resetPressCount } } }
 		} = this.props;
-		resetDisabled();
+		resetPressCount();
 	}
 
 	handlePress = async () => {
