@@ -12,9 +12,13 @@ import { Button } from 'react-native-elements';
 class Linea extends Component {
 	constructor() {
 		super();
+		this.state = {
+			connected: false
+		};
 		this.linea = new LineaPro();
 		this.linea.addConnectionStateListener(this.connectionStateListener);
 		this.linea.addDebugListener(this.debugCallback);
+		this._isMounted = true;
 	}
 
 	componentWillUnmount() {
@@ -22,65 +26,32 @@ class Linea extends Component {
 			navigation: { state: { params: { resetPressCount } } }
 		} = this.props;
 		resetPressCount();
+		this._isMounted = false;
 	}
 
-	connect = () => {
+	componentDidMount() {
 		this.linea.initialize();
-	};
+	}
 
 	connectionStateListener = data => {
-		console.log('connection state listenerz', data);
+		if (this._isMounted) {
+			data
+				? this.setState({ connected: true })
+				: this.setState({ connected: false });
+		}
 	};
-
-	debugCallback = bug => {
-		console.log('bug', bug);
-	};
-
-	add = () => {
-		console.log('scan');
-		this.linea.scanRf();
-	};
-
-	rfCardInfoListener(data) {}
-
-	debugListener(data) {}
-
-	magneticInfoListener(data) {}
 
 	render() {
+		const { connected } = this.state;
+		const connectionString = connected ? 'True' : 'False';
+		const backgroundColor = connected
+			? styles.containerGreen
+			: styles.containerRed;
 		return (
-			<View style={styles.container}>
-				<View style={styles.body} />
-				<Button
-					raised
-					large
-					buttonStyle={{
-						backgroundColor: '#ffcc88',
-						borderRadius: 10
-					}}
-					style={styles.scanButton}
-					icon={{
-						name: 'settings-remote',
-						type: 'MaterialIcons'
-					}}
-					title="connect"
-					onPress={this.connect}
-				/>
-				<Button
-					raised
-					large
-					buttonStyle={{
-						backgroundColor: '#ffcc66',
-						borderRadius: 10
-					}}
-					style={styles.scanButton}
-					icon={{
-						name: 'settings-remote',
-						type: 'MaterialIcons'
-					}}
-					title="Add"
-					onPress={this.add}
-				/>
+			<View style={backgroundColor}>
+				<View style={styles.body}>
+					<Text style={styles.text}> {connectionString} </Text>
+				</View>
 			</View>
 		);
 	}
@@ -89,13 +60,23 @@ class Linea extends Component {
 export default Linea;
 
 const styles = StyleSheet.create({
-	container: {
+	containerRed: {
 		flex: 1,
-		backgroundColor: 'white'
+		backgroundColor: 'red'
+	},
+	containerGreen: {
+		flex: 1,
+		backgroundColor: 'green'
 	},
 	body: {
 		flex: 1,
-		justifyContent: 'center'
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	text: {
+		color: 'white',
+		fontSize: 60,
+		fontFamily: 'Helvetica Neue'
 	},
 	scanButton: {
 		justifyContent: 'flex-end',
