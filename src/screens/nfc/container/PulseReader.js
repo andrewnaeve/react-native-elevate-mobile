@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import base64 from 'base-64';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import { NFCNDEFReaderSession } from 'react-native-nfc-ios';
-import { height, width } from '../utils/styleConstants';
+import { height, width } from '../../../utils/styleConstants';
 import { Button } from 'react-native-elements';
 
+// currently only working with NDEF formatted wristbands.
+// use linea sdk instead
 export default class PulseReader extends Component {
 	static navigationOptions = ({ navigation }) => ({
 		title: `Pulse`

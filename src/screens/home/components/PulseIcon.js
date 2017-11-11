@@ -47,7 +47,7 @@ class Pulse extends Component {
 					onPressOut={this.handlePulseRelease}
 				>
 					<Animated.Image
-						source={require('../../img/pulse.png')}
+						source={require('../../../img/pulse.png')}
 						onLoad={this.handleLoad}
 						style={{
 							transform: [{ scale: animatePulse }]

@@ -1,9 +1,8 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import Home from '../components/Home/Home';
-import PulseReader from '../components/NFC/PulseReader';
-import Linea from '../components/Linea/Linea';
-import ElevateStore from '../components/Elevate/ElevateStore';
+import Home from '../screens/home/container/Home';
+import PulseReader from '../screens/nfc/container/PulseReader';
+import Linea from '../screens/linea/container/Linea';
 
 export const HomeScreen = StackNavigator(
 	{

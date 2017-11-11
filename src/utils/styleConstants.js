@@ -4,15 +4,6 @@ export const { height, width } = Dimensions.get('window');
 
 export const containerWidth = width * 0.95;
 
-// -- Testing Only --
-// const fontScale = PixelRatio.getFontScale();
-// const layoutSize = PixelRatio.getPixelSizeForLayoutSize(14);
-// console.log(‘normalizeText getPR ->’, PixelRatio);
-// console.log(‘normalizeText getFS ->’, fontScale);
-// console.log(‘normalizeText getDH ->’, height);
-// console.log(‘normalizeText getDW ->’, width);
-// console.log(‘normalizeText getPSFLS ->‘, layoutSize);
-
 const normalize = size => {
 	if (PixelRatio === 2) {
 		// iphone 5s and older Androids

@@ -47,7 +47,7 @@ class Elevate extends Component {
 					onPressOut={this.handleElevateRelease}
 				>
 					<Animated.Image
-						source={require('../../img/elevate.png')}
+						source={require('../../../img/elevate.png')}
 						onLoad={this.handleLoad}
 						style={{
 							transform: [{ scale: animateElevate }]

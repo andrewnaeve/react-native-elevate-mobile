@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { HomeScreen } from './src/config/router';
-import Loading from './src/components/Loading/Loading';
-import store from './src/store';
+import { StyleSheet, View } from 'react-native';
+import { HomeScreen } from './src/nav/router';
+import Loading from './src/screens/loading/Loading';
+import store from './src/redux/store';
 import { Provider } from 'react-redux';
 
 export default class App extends Component {

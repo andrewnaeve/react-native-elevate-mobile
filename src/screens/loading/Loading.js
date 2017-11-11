@@ -99,12 +99,5 @@ const styles = StyleSheet.create({
 	shrink: {
 		width: 0,
 		height: 0
-	},
-	shederick: {
-		transform: [
-			{
-				scale: 2
-			}
-		]
 	}
 });
