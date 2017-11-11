@@ -1,20 +1,20 @@
 import { ASSET_READY } from '../actions/assetReady';
-import { UNLOAD_ASSET } from '../actions/unloadAsset';
+import { UNMOUNT_ASSET } from '../actions/unmountAsset';
 
 import initialState from '../initialState';
 
 export const assetsLoaded = (state = initialState.assetsLoaded, action) => {
-	const img = action.payload;
+	const asset = action.payload;
 	switch (action.type) {
 		case ASSET_READY:
 			return {
 				...state,
-				[img]: true
+				[asset]: true
 			};
-		case UNLOAD_ASSET:
+		case UNMOUNT_ASSET:
 			return {
 				...state,
-				[img]: false
+				[asset]: false
 			};
 		default:
 			return state;

@@ -17,13 +17,6 @@ export default class PulseReader extends Component {
 		this.readerSession = null;
 	}
 
-	componentWillUnmount() {
-		const {
-			navigation: { state: { params: { resetPressCount } } }
-		} = this.props;
-		resetPressCount();
-	}
-
 	handlePress = async () => {
 		const messages = await NFCNDEFReaderSession.readTag({
 			alertMessage: 'Place wristband next to reader'

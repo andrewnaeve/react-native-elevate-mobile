@@ -10,19 +10,7 @@ import {
 class Elevate extends Component {
 	constructor() {
 		super();
-		this.state = {
-			presses: 0
-		};
 		this.animateElevate = new Animated.Value(1);
-	}
-
-	componentDidUpdate() {
-		const { presses } = this.state;
-		const { navigation: { navigate } } = this.props;
-		presses === 1 &&
-			navigate('Elevate', {
-				resetPressCount: this.resetPressCount
-			});
 	}
 
 	handleElevatePress = () => {
@@ -34,28 +22,17 @@ class Elevate extends Component {
 	};
 
 	handleElevateRelease = () => {
+		const { navigation: { navigate } } = this.props;
 		Animated.timing(this.animateElevate, {
 			toValue: 1,
 			duration: 100,
 			easing: Easing.ease
-		}).start(() => this.navigateOnFirstPressOnly());
+		}).start(() => navigate('Elevate'));
 	};
 
 	handleLoad = () => {
 		const { handleLoad } = this.props;
 		handleLoad();
-	};
-
-	resetPressCount = () => {
-		this.setState({
-			presses: 0
-		});
-	};
-
-	navigateOnFirstPressOnly = () => {
-		this.setState((prevState, props) => ({
-			presses: prevState.presses + 1
-		}));
 	};
 
 	render() {

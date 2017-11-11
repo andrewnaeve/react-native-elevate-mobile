@@ -8,17 +8,17 @@ import {
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { unloadAsset } from '../../actions/unloadAsset';
+import { unmountAsset } from '../../actions/unmountAsset';
 import { assetReady } from '../../actions/assetReady';
 import { appReady } from '../../actions/appReady';
-import Elevate from './Elevate';
-import Pulse from './Pulse';
+import ElevateIcon from './ElevateIcon';
+import PulseIcon from './PulseIcon';
 
 class Home extends Component {
 	componentWillReceiveProps(nextProps) {
-		const { assetsLoaded } = nextProps;
-		const { elevate, pulse } = assetsLoaded;
-		elevate && pulse && this.props.appReady();
+		const { assetsLoaded: { elevate, pulse } } = nextProps;
+		const { appReady } = this.props;
+		elevate && pulse && appReady();
 	}
 
 	handleElevateLoad = () => {
@@ -33,11 +33,11 @@ class Home extends Component {
 		const { navigation } = this.props;
 		return (
 			<View style={styles.container}>
-				<Elevate
+				<ElevateIcon
 					handleLoad={this.handleElevateLoad}
 					navigation={navigation}
 				/>
-				<Pulse
+				<PulseIcon
 					handleLoad={this.handlePulseLoad}
 					navigation={navigation}
 				/>
@@ -60,7 +60,7 @@ const mapStateToProps = ({ assetsLoaded }) => {
 };
 
 const mapDispatchToProps = dispatch => {
-	return bindActionCreators({ unloadAsset, assetReady, appReady }, dispatch);
+	return bindActionCreators({ unmountAsset, assetReady, appReady }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

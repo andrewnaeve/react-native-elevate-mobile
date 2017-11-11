@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { unloadAsset } from '../../actions/unloadAsset';
+import { unmountAsset } from '../../actions/unmountAsset';
 import { assetReady } from '../../actions/assetReady';
 import { appReady } from '../../actions/appReady';
 import { height, width } from '../utils/styleConstants';
@@ -106,7 +106,7 @@ const mapStateToProps = ({ assetsLoaded, cart }) => {
 };
 
 const mapDispatchToProps = dispatch => {
-	return bindActionCreators({ unloadAsset, assetReady, appReady }, dispatch);
+	return bindActionCreators({ unmountAsset, assetReady, appReady }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ElevateStore);

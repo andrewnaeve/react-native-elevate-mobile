@@ -10,19 +10,7 @@ import {
 class Pulse extends Component {
 	constructor() {
 		super();
-		this.state = {
-			presses: 0
-		};
 		this.animatePulse = new Animated.Value(1);
-	}
-
-	componentDidUpdate() {
-		const { presses } = this.state;
-		const { navigation: { navigate } } = this.props;
-		presses === 1 &&
-			navigate('Pulse', {
-				resetPressCount: this.resetPressCount
-			});
 	}
 
 	handlePulsePress = () => {
@@ -34,28 +22,17 @@ class Pulse extends Component {
 	};
 
 	handlePulseRelease = () => {
+		const { navigation: { navigate } } = this.props;
 		Animated.timing(this.animatePulse, {
 			toValue: 1,
 			duration: 100,
 			easing: Easing.ease
-		}).start(() => this.navigateOnFirstPressOnly());
+		}).start(() => navigate('Pulse'));
 	};
 
 	handleLoad = () => {
 		const { handleLoad } = this.props;
 		handleLoad();
-	};
-
-	resetPressCount = () => {
-		this.setState({
-			presses: 0
-		});
-	};
-
-	navigateOnFirstPressOnly = () => {
-		this.setState((prevState, props) => ({
-			presses: prevState.presses + 1
-		}));
 	};
 
 	render() {

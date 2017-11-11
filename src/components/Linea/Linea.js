@@ -21,14 +21,6 @@ class Linea extends Component {
 		this._isMounted = true;
 	}
 
-	componentWillUnmount() {
-		const {
-			navigation: { state: { params: { resetPressCount } } }
-		} = this.props;
-		resetPressCount();
-		this._isMounted = false;
-	}
-
 	componentDidMount() {
 		this.linea.initialize();
 	}
