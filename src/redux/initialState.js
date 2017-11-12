@@ -1,5 +1,5 @@
 const initialState = {
-	assetsLoaded: {},
+	assetsReady: {},
 	appIsReady: {},
 	cart: {}
 };

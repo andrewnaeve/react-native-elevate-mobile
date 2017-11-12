@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import base64 from 'base-64';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
-import { NFCNDEFReaderSession } from 'react-native-nfc-ios';
 import { height, width } from '../../../utils/styleConstants';
 import { Button } from 'react-native-elements';
-
+import LineaPro from 'react-native-linea';
 // currently only working with NDEF formatted wristbands.
 // use linea sdk instead
 export default class PulseReader extends Component {
@@ -16,19 +15,15 @@ export default class PulseReader extends Component {
 		this.state = {
 			message: ''
 		};
-		this.readerSession = null;
+		this.linea = new LineaPro();
+		this._isMounted = true;
 	}
 
-	handlePress = async () => {
-		const messages = await NFCNDEFReaderSession.readTag({
-			alertMessage: 'Place wristband next to reader'
-		});
-		const payloadB64 = messages[0].records[0].payload;
-		const payload = base64.decode(payloadB64);
-		this.setState({
-			message: payload
-		});
-	};
+	componentDidMount() {}
+
+	componentWillUnmount() {
+		this._isMounted = false;
+	}
 
 	render() {
 		return (
@@ -45,8 +40,7 @@ export default class PulseReader extends Component {
 					}}
 					style={styles.scanButton}
 					icon={{ name: 'settings-remote', type: 'MaterialIcons' }}
-					title="Scan Wristband"
-					onPress={this.handlePress}
+					title="Activate Chip Reader"
 				/>
 			</View>
 		);

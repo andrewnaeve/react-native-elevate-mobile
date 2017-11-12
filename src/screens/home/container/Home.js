@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { unmountAsset } from '../../../redux/actions/unmountAsset';
+import { assetNotReady } from '../../../redux/actions/assetNotReady';
 import { assetReady } from '../../../redux/actions/assetReady';
 import { appReady } from '../../../redux/actions/appReady';
 import ElevateIcon from '../components/ElevateIcon';
@@ -16,7 +16,7 @@ import PulseIcon from '../components/PulseIcon';
 
 class Home extends Component {
 	componentWillReceiveProps(nextProps) {
-		const { assetsLoaded: { elevate, pulse } } = nextProps;
+		const { assetsReady: { elevate, pulse } } = nextProps;
 		const { appReady } = this.props;
 		elevate && pulse && appReady();
 	}
@@ -55,12 +55,15 @@ const styles = StyleSheet.create({
 	}
 });
 
-const mapStateToProps = ({ assetsLoaded }) => {
-	return { assetsLoaded };
+const mapStateToProps = ({ assetsReady }) => {
+	return { assetsReady };
 };
 
 const mapDispatchToProps = dispatch => {
-	return bindActionCreators({ unmountAsset, assetReady, appReady }, dispatch);
+	return bindActionCreators(
+		{ assetNotReady, assetReady, appReady },
+		dispatch
+	);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -26,7 +26,8 @@
 		"react": "^16.0.0",
 		"react-native": "^0.50.1",
 		"react-native-elements": "^0.17.0",
-		"react-native-linea": "git://github.com/andrewnaeve/react-native-linea",
+		"react-native-linea":
+			"git://github.com/andrewnaeve/react-native-linea#emv2",
 		"react-native-linear-gradient": "^2.3.0",
 		"react-native-nfc-ios": "^0.1.5",
 		"react-native-vector-icons": "^4.4.2",

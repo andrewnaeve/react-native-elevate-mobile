@@ -3827,9 +3827,9 @@ react-native-elements@^0.17.0:
     react-native-side-menu "^1.0.2"
     react-native-tab-navigator "^0.3.4"
 
-"react-native-linea@git://github.com/andrewnaeve/react-native-linea":
+"react-native-linea@git://github.com/andrewnaeve/react-native-linea#emv2":
   version "1.3.0"
-  resolved "git://github.com/andrewnaeve/react-native-linea#ae87fb6b93ba0b8f44fcc52eed1815b40c5e2b9c"
+  resolved "git://github.com/andrewnaeve/react-native-linea#7352e19d67305ba889f0882186311a6db82c2fd2"
 
 react-native-linear-gradient@^2.3.0:
   version "2.3.0"

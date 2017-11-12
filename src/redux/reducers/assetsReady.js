@@ -1,9 +1,9 @@
 import { ASSET_READY } from '../actions/assetReady';
-import { UNMOUNT_ASSET } from '../actions/unmountAsset';
+import { ASSET_NOT_READY } from '../actions/assetNotReady';
 
 import initialState from '../initialState';
 
-export const assetsLoaded = (state = initialState.assetsLoaded, action) => {
+export const assetsReady = (state = initialState.assetsReady, action) => {
 	const asset = action.payload;
 	switch (action.type) {
 		case ASSET_READY:
@@ -11,7 +11,7 @@ export const assetsLoaded = (state = initialState.assetsLoaded, action) => {
 				...state,
 				[asset]: true
 			};
-		case UNMOUNT_ASSET:
+		case ASSET_NOT_READY:
 			return {
 				...state,
 				[asset]: false

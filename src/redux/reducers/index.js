@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import { assetsLoaded } from './assetsLoaded';
+import { assetsReady } from './assetsReady';
 import { appIsReady } from './appIsReady';
 import { cart } from './cartReducer';
 
 const rootReducer = combineReducers({
-	assetsLoaded,
+	assetsReady,
 	appIsReady,
 	cart
 });
