@@ -16,9 +16,6 @@ class Linea extends Component {
 			connected: false
 		};
 		this.linea = new LineaPro();
-		this.linea.addConnectionStateListener(this.connectionStateListener);
-		this.linea.addDebugListener(this.debugCallback);
-		this._isMounted = true;
 	}
 
 	componentDidMount() {

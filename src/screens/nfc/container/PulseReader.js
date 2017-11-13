@@ -16,14 +16,46 @@ export default class PulseReader extends Component {
 			message: ''
 		};
 		this.linea = new LineaPro();
+		this.linea.addConnectionStateListener(this.connectionStateListener);
+		this.linea.addDebugListener(this.debugListener);
+		this.linea.addEmvTransactionStartedListener(
+			this.transactionStartedListener
+		);
 		this._isMounted = true;
 	}
 
-	componentDidMount() {}
+	componentDidMount() {
+		this.linea.initializeEmv();
+	}
 
 	componentWillUnmount() {
 		this._isMounted = false;
 	}
+
+	startTransaction = () => {
+		this.linea.startEmvTransaction();
+	};
+
+	cancelTransaction = () => {
+		this.linea.cancelEmvTransaction();
+	};
+
+	connectionStateListener = data => {
+		console.log(data);
+		if (this._isMounted) {
+			data
+				? this.setState({ connected: true })
+				: this.setState({ connected: false });
+		}
+	};
+
+	transactionStartedListener = data => {
+		console.log(data);
+	};
+
+	debugListener = data => {
+		console.log('data', data);
+	};
 
 	render() {
 		return (
@@ -40,7 +72,20 @@ export default class PulseReader extends Component {
 					}}
 					style={styles.scanButton}
 					icon={{ name: 'settings-remote', type: 'MaterialIcons' }}
-					title="Activate Chip Reader"
+					title="Start Transaction"
+					onPress={this.startTransaction}
+				/>
+				<Button
+					raised
+					large
+					buttonStyle={{
+						backgroundColor: '#954646',
+						borderRadius: 10
+					}}
+					style={styles.scanButton}
+					icon={{ name: 'settings-remote', type: 'MaterialIcons' }}
+					title="Cancel Transaction"
+					onPress={this.cancelTransaction}
 				/>
 			</View>
 		);
