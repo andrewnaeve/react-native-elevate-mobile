@@ -1,7 +1,7 @@
 const initialState = {
 	assetsReady: {},
-	appIsReady: {},
-	cart: {}
+	appIsReady: false,
+	lineaConnected: false
 };
 
 export default initialState;

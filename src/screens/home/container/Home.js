@@ -1,32 +1,55 @@
 import React, { Component } from 'react';
-import {
-	View,
-	TouchableWithoutFeedback,
-	Animated,
-	Easing,
-	StyleSheet
-} from 'react-native';
+import LineaPro from 'react-native-linea';
+import { View, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { assetNotReady } from '../../../redux/actions/assetNotReady';
 import { assetReady } from '../../../redux/actions/assetReady';
 import { appReady } from '../../../redux/actions/appReady';
+import { lineaConnected } from '../../../redux/actions/lineaConnected';
 import ElevateIcon from '../components/ElevateIcon';
 import PulseIcon from '../components/PulseIcon';
 
 class Home extends Component {
+	constructor() {
+		super();
+		this.linea = new LineaPro();
+		this.linea.addConnectionStateListener(
+			this.lineaConnectionStateListener
+		);
+		this._isMounted = true;
+	}
+
+	componentDidMount() {
+		this.linea.initialize();
+	}
+
+	componentWillUnmount() {
+		const { assetNotReady } = this.props;
+		assetNotReady('elevate');
+		assetNotReady('pulse');
+	}
+
 	componentWillReceiveProps(nextProps) {
 		const { assetsReady: { elevate, pulse } } = nextProps;
 		const { appReady } = this.props;
-		elevate && pulse && appReady();
+		elevate && pulse && appReady(true);
+	}
+
+	lineaConnectionStateListener(data) {
+		const { lineaConnected } = this.props;
+		console.log(data);
+		lineaConnected(data);
 	}
 
 	handleElevateLoad = () => {
-		this.props.assetReady('elevate');
+		const { assetReady } = this.props;
+		assetReady('elevate');
 	};
 
 	handlePulseLoad = () => {
-		this.props.assetReady('pulse');
+		const { assetReady } = this.props;
+		assetReady('pulse');
 	};
 
 	render() {
@@ -61,7 +84,7 @@ const mapStateToProps = ({ assetsReady }) => {
 
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators(
-		{ assetNotReady, assetReady, appReady },
+		{ assetNotReady, assetReady, appReady, lineaConnected },
 		dispatch
 	);
 };

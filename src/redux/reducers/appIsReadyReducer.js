@@ -1,18 +1,11 @@
 import { APP_READY } from '../actions/appReady';
-import { APP_NOT_READY } from '../actions/appNotReady';
-
 import initialState from '../initialState';
 
 export const appIsReady = (state = initialState.appIsReady, action) => {
+	const ready = action.payload;
 	switch (action.type) {
 		case APP_READY:
-			return {
-				appIsReady: true
-			};
-		case APP_NOT_READY:
-			return {
-				appIsReady: false
-			};
+			return ready;
 		default:
 			return state;
 	}

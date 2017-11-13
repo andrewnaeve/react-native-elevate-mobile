@@ -1,12 +1,12 @@
+import { assetsReady } from './assetsReadyReducer';
+import { appIsReady } from './appIsReadyReducer';
+import { lineaConnected } from './lineaConnectedReducer';
 import { combineReducers } from 'redux';
-import { assetsReady } from './assetsReady';
-import { appIsReady } from './appIsReady';
-import { cart } from './cartReducer';
 
 const rootReducer = combineReducers({
 	assetsReady,
 	appIsReady,
-	cart
+	lineaConnected
 });
 
 export default rootReducer;

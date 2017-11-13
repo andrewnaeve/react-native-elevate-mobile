@@ -17,18 +17,46 @@ export default class PulseReader extends Component {
 		this.state = {
 			message: ''
 		};
-		this.readerSession = null;
+		this.linea = new LineaPro();
+		this.linea.addConnectionStateListener(this.connectionStateListener);
+		this.linea.addDebugListener(this.debugListener);
+		this.linea.addEmvTransactionStartedListener(
+			this.transactionStartedListener
+		);
+		this._isMounted = true;
 	}
 
-	handlePress = async () => {
-		const messages = await NFCNDEFReaderSession.readTag({
-			alertMessage: 'Place wristband next to reader'
-		});
-		const payloadB64 = messages[0].records[0].payload;
-		const payload = base64.decode(payloadB64);
-		this.setState({
-			message: payload
-		});
+	componentDidMount() {
+		this.linea.initializeEmv();
+	}
+
+	componentWillUnmount() {
+		this._isMounted = false;
+	}
+
+	startTransaction = () => {
+		this.linea.startEmvTransaction();
+	};
+
+	cancelTransaction = () => {
+		this.linea.cancelEmvTransaction();
+	};
+
+	connectionStateListener = data => {
+		console.log(data);
+		if (this._isMounted) {
+			data
+				? this.setState({ connected: true })
+				: this.setState({ connected: false });
+		}
+	};
+
+	transactionStartedListener = data => {
+		console.log(data);
+	};
+
+	debugListener = data => {
+		console.log('data', data);
 	};
 
 	render() {
@@ -46,8 +74,20 @@ export default class PulseReader extends Component {
 					}}
 					style={styles.scanButton}
 					icon={{ name: 'settings-remote', type: 'MaterialIcons' }}
-					title="Scan Wristband"
-					onPress={this.handlePress}
+					title="Start Transaction"
+					onPress={this.startTransaction}
+				/>
+				<Button
+					raised
+					large
+					buttonStyle={{
+						backgroundColor: '#954646',
+						borderRadius: 10
+					}}
+					style={styles.scanButton}
+					icon={{ name: 'settings-remote', type: 'MaterialIcons' }}
+					title="Cancel Transaction"
+					onPress={this.cancelTransaction}
 				/>
 			</View>
 		);
