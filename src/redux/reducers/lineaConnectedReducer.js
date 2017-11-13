@@ -5,9 +5,7 @@ export const lineaConnected = (state = initialState.lineaConnected, action) => {
 	const connected = action.payload;
 	switch (action.type) {
 		case LINEA_CONNECTED:
-			return {
-				lineaConnected: connected
-			};
+			return connected;
 		default:
 			return state;
 	}

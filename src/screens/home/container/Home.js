@@ -14,7 +14,9 @@ class Home extends Component {
 	constructor() {
 		super();
 		this.linea = new LineaPro();
-		this.linea.addConnectionStateListener(this.connectionStateListener);
+		this.linea.addConnectionStateListener(
+			this.lineaConnectionStateListener
+		);
 		this._isMounted = true;
 	}
 
@@ -34,14 +36,20 @@ class Home extends Component {
 		elevate && pulse && appReady(true);
 	}
 
-	connectionStateListener() {}
+	lineaConnectionStateListener(data) {
+		const { lineaConnected } = this.props;
+		console.log(data);
+		lineaConnected(data);
+	}
 
 	handleElevateLoad = () => {
-		this.props.assetReady('elevate');
+		const { assetReady } = this.props;
+		assetReady('elevate');
 	};
 
 	handlePulseLoad = () => {
-		this.props.assetReady('pulse');
+		const { assetReady } = this.props;
+		assetReady('pulse');
 	};
 
 	render() {
