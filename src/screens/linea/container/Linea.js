@@ -12,28 +12,13 @@ import { Button } from 'react-native-elements';
 class Linea extends Component {
 	constructor() {
 		super();
-		this.state = {
-			connected: false
-		};
 		this.linea = new LineaPro();
 	}
 
-	componentDidMount() {
-		this.linea.initialize();
-	}
-
-	connectionStateListener = data => {
-		if (this._isMounted) {
-			data
-				? this.setState({ connected: true })
-				: this.setState({ connected: false });
-		}
-	};
-
 	render() {
-		const { connected } = this.state;
-		const connectionString = connected ? 'True' : 'False';
-		const backgroundColor = connected
+		const { lineaConnected } = this.props;
+		const connectionString = lineaConnected ? 'True' : 'False';
+		const backgroundColor = lineaConnected
 			? styles.containerGreen
 			: styles.containerRed;
 		return (
@@ -46,7 +31,18 @@ class Linea extends Component {
 	}
 }
 
-export default Linea;
+const mapStateToProps = ({ assetsReady, lineaConnected }) => {
+	return { assetsReady, lineaConnected };
+};
+
+const mapDispatchToProps = dispatch => {
+	return bindActionCreators(
+		{ assetNotReady, assetReady, appReady },
+		dispatch
+	);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Linea);
 
 const styles = StyleSheet.create({
 	containerRed: {
