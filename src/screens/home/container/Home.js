@@ -31,17 +31,15 @@ class Home extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		console.log(nextProps);
 		const { assetsReady: { elevate, pulse } } = nextProps;
 		const { appReady } = this.props;
 		elevate && pulse && appReady(true);
 	}
 
-	lineaConnectionStateListener(data) {
-		// const { lineaConnected } = this.props;
-		console.log(this.props);
-		// lineaConnected(data);
-	}
+	lineaConnectionStateListener = data => {
+		const { lineaConnected } = this.props;
+		lineaConnected(data);
+	};
 
 	handleElevateLoad = () => {
 		const { assetReady } = this.props;

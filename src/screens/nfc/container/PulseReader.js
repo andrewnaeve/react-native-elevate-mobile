@@ -38,15 +38,6 @@ export default class PulseReader extends Component {
 		this.linea.cancelEmvTransaction();
 	};
 
-	connectionStateListener = data => {
-		console.log(data);
-		if (this._isMounted) {
-			data
-				? this.setState({ connected: true })
-				: this.setState({ connected: false });
-		}
-	};
-
 	transactionStartedListener = data => {
 		console.log(data);
 	};

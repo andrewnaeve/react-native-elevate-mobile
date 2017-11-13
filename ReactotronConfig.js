@@ -7,6 +7,6 @@ reactotronRedux({
 });
 
 // then add it to the plugin list
-Reactotron.configure({ name: 'ElevateMobile' })
-	.use(reactotronRedux()) //  <- here i am!
-	.connect(); //Don't forget about me!
+Reactotron.configure({ name: 'Elevate Mobile' })
+	.use(reactotronRedux())
+	.connect();
