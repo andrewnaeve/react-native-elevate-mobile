@@ -1,7 +1,7 @@
 const initialState = {
 	assetsReady: {},
 	appIsReady: false,
-	lineaConnected: false
+	lineaIsConnected: false
 };
 
 export default initialState;

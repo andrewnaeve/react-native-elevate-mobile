@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import LineaPro from 'react-native-linea';
 import { View, TouchableWithoutFeedback, StyleSheet } from 'react-native';
-import { bindActionCreators } from 'redux';
+import LineaPro from 'react-native-linea';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { assetNotReady } from '../../../redux/actions/assetNotReady';
 import { assetReady } from '../../../redux/actions/assetReady';
 import { appReady } from '../../../redux/actions/appReady';
@@ -31,15 +31,16 @@ class Home extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		console.log(nextProps);
 		const { assetsReady: { elevate, pulse } } = nextProps;
 		const { appReady } = this.props;
 		elevate && pulse && appReady(true);
 	}
 
 	lineaConnectionStateListener(data) {
-		const { lineaConnected } = this.props;
-		console.log(data);
-		lineaConnected(data);
+		// const { lineaConnected } = this.props;
+		console.log(this.props);
+		// lineaConnected(data);
 	}
 
 	handleElevateLoad = () => {

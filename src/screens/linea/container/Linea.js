@@ -1,5 +1,5 @@
-import LineaPro from 'react-native-linea';
 import React, { Component } from 'react';
+import LineaPro from 'react-native-linea';
 import {
 	TouchableOpacity,
 	StyleSheet,
@@ -7,6 +7,8 @@ import {
 	Text,
 	AlertIOS
 } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Button } from 'react-native-elements';
 
 class Linea extends Component {
@@ -16,9 +18,9 @@ class Linea extends Component {
 	}
 
 	render() {
-		const { lineaConnected } = this.props;
-		const connectionString = lineaConnected ? 'True' : 'False';
-		const backgroundColor = lineaConnected
+		const { lineaIsConnected } = this.props;
+		const connectionString = lineaIsConnected ? 'True' : 'False';
+		const backgroundColor = lineaIsConnected
 			? styles.containerGreen
 			: styles.containerRed;
 		return (
@@ -31,18 +33,11 @@ class Linea extends Component {
 	}
 }
 
-const mapStateToProps = ({ assetsReady, lineaConnected }) => {
-	return { assetsReady, lineaConnected };
+const mapStateToProps = ({ lineaIsConnected }) => {
+	return { lineaIsConnected };
 };
 
-const mapDispatchToProps = dispatch => {
-	return bindActionCreators(
-		{ assetNotReady, assetReady, appReady },
-		dispatch
-	);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Linea);
+export default connect(mapStateToProps)(Linea);
 
 const styles = StyleSheet.create({
 	containerRed: {

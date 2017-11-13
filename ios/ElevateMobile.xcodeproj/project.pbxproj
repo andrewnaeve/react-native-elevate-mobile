@@ -353,13 +353,6 @@
 			remoteGlobalIDString = 3D383D621EBD27B9005632C8;
 			remoteInfo = "double-conversion-tvOS";
 		};
-		BCFEFB651F9D339F007A4B77 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 37AE2A189E4D48D390722E82 /* ReactNativeNfcIos.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = ReactNativeNfcIos;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -387,7 +380,6 @@
 		2255D6BB32CE457D9FD0EA39 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* ElevateMobile-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ElevateMobile-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* ElevateMobile-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ElevateMobile-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		37AE2A189E4D48D390722E82 /* ReactNativeNfcIos.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNfcIos.xcodeproj; path = "../node_modules/react-native-nfc-ios/ios/ReactNativeNfcIos.xcodeproj"; sourceTree = "<group>"; };
 		54B056C691B044299F86B29C /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		706C1223202C4F15BEA39131 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
@@ -631,7 +623,6 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				B66D30DBF45C4E32A293C6DA /* react-native-linea.xcodeproj */,
-				37AE2A189E4D48D390722E82 /* ReactNativeNfcIos.xcodeproj */,
 				54B056C691B044299F86B29C /* BVLinearGradient.xcodeproj */,
 				7202D59F883E467C84EEB8FB /* RNVectorIcons.xcodeproj */,
 			);
@@ -744,14 +735,6 @@
 				BCC9C7D21F9D29A80029A31F /* ExternalAccessory.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		BCFEFB621F9D339F007A4B77 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				BCFEFB661F9D339F007A4B77 /* libReactNativeNfcIos.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		C7FDF34AF9AE471A8D83B665 /* Resources */ = {
@@ -967,10 +950,6 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
-				},
-				{
-					ProductGroup = BCFEFB621F9D339F007A4B77 /* Products */;
-					ProjectRef = 37AE2A189E4D48D390722E82 /* ReactNativeNfcIos.xcodeproj */;
 				},
 				{
 					ProductGroup = BC1132C21F9D36A1008CCD69 /* Products */;
@@ -1259,13 +1238,6 @@
 			fileType = archive.ar;
 			path = "libdouble-conversion.a";
 			remoteRef = BCFEFB601F9D3391007A4B77 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		BCFEFB661F9D339F007A4B77 /* libReactNativeNfcIos.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libReactNativeNfcIos.a;
-			remoteRef = BCFEFB651F9D339F007A4B77 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

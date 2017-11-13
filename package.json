@@ -5,11 +5,14 @@
 	"devDependencies": {
 		"babel-preset-react-native-stage-0": "^1.0.1",
 		"jest-expo": "^21.0.2",
-		"react-test-renderer": "16.0.0-alpha.12"
+		"react-test-renderer": "16.0.0-alpha.12",
+		"reactotron-react-native": "^1.12.3",
+		"reactotron-redux": "^1.12.2",
+		"remote-redux-devtools": "^0.5.12",
+		"remotedev-rn-debugger": "^0.8.3"
 	},
 	"scripts": {
-		"nuke":
-			"watchman watch-del-all && rm -rf node_modules && rm -fr $TMPDIR/react-* && yarn && react-native link",
+		"nuke": "watchman watch-del-all && rm -rf node_modules && rm -fr $TMPDIR/react-* && yarn && react-native link",
 		"linea": "rm -rf yarn.lock && rm -rf node_modules && yarn",
 		"android": "react-native run-android",
 		"ios": "react-native run-ios",
@@ -26,8 +29,7 @@
 		"react": "^16.0.0",
 		"react-native": "^0.50.1",
 		"react-native-elements": "^0.17.0",
-		"react-native-linea":
-			"git://github.com/andrewnaeve/react-native-linea#emv2",
+		"react-native-linea": "git://github.com/andrewnaeve/react-native-linea#emv2",
 		"react-native-linear-gradient": "^2.3.0",
 		"react-native-vector-icons": "^4.4.2",
 		"react-navigation": "^1.0.0-beta.19",
