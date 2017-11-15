@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LineaPro from 'react-native-linea';
+import LineaEmv from 'react-native-linea';
 import base64 from 'base-64';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import { height, width } from '../../../utils/styleConstants';
@@ -15,33 +16,12 @@ export default class PulseReader extends Component {
 			message: ''
 		};
 		this.linea = new LineaPro();
-
 		this._isMounted = true;
-	}
-
-	componentDidMount() {
-		this.linea.initializeEmv();
 	}
 
 	componentWillUnmount() {
 		this._isMounted = false;
 	}
-
-	startTransaction = () => {
-		this.linea.startEmvTransaction();
-	};
-
-	cancelTransaction = () => {
-		this.linea.cancelEmvTransaction();
-	};
-
-	transactionStartedListener = data => {
-		console.log(data);
-	};
-
-	debugListener = data => {
-		console.log('data', data);
-	};
 
 	render() {
 		return (

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LineaPro from 'react-native-linea';
+import { LineaPro, LineaMPos } from 'react-native-linea';
 import {
 	TouchableOpacity,
 	StyleSheet,
@@ -14,8 +14,17 @@ import { Button } from 'react-native-elements';
 class Linea extends Component {
 	constructor() {
 		super();
-		this.linea = new LineaPro();
+		this.mpos = new LineaMPos();
+		this.mpos.addDebugListener(this.debugListener);
 	}
+
+	componentDidMount() {
+		this.mpos.emvInit();
+	}
+
+	debugListener = error => {
+		console.log('err', error);
+	};
 
 	render() {
 		const { lineaIsConnected } = this.props;

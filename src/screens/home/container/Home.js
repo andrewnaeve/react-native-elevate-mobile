@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, TouchableWithoutFeedback, StyleSheet } from 'react-native';
-import LineaPro from 'react-native-linea';
+import { LineaMPos } from 'react-native-linea';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { assetNotReady } from '../../../redux/actions/assetNotReady';
@@ -13,15 +13,13 @@ import PulseIcon from '../components/PulseIcon';
 class Home extends Component {
 	constructor() {
 		super();
-		this.linea = new LineaPro();
-		this.linea.addConnectionStateListener(
-			this.lineaConnectionStateListener
-		);
+		this.mpos = new LineaMPos();
+		this.mpos.addConnectionStateListener(this.lineaConnectionStateListener);
 		this._isMounted = true;
 	}
 
 	componentDidMount() {
-		this.linea.initialize();
+		this.mpos.connect();
 	}
 
 	componentWillUnmount() {
