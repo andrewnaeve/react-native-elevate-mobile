@@ -5,15 +5,11 @@
 	"devDependencies": {
 		"babel-preset-react-native-stage-0": "^1.0.1",
 		"jest-expo": "^21.0.2",
-		"react-test-renderer": "16.0.0-alpha.12",
-		"reactotron-react-native": "^1.12.3",
-		"reactotron-redux": "^1.12.2",
-		"remote-redux-devtools": "^0.5.12",
-		"remotedev-rn-debugger": "^0.8.3"
+		"react-test-renderer": "16.0.0-alpha.12"
 	},
 	"scripts": {
 		"nuke": "watchman watch-del-all && rm -rf node_modules && rm -fr $TMPDIR/react-* && yarn && react-native link",
-		"linea": "yarn add git://github.com/andrewnaeve/react-native-linea#LineaEmv",
+		"linea": "yarn add git://github.com/andrewnaeve/react-native-linea#LineaEmv2",
 		"android": "react-native run-android",
 		"ios": "react-native run-ios",
 		"test": "node node_modules/jest/bin/jest.js --watch"
@@ -27,9 +23,9 @@
 		"eslint-plugin-react": "^7.4.0",
 		"eslint-plugin-react-native": "^3.1.0",
 		"react": "^16.0.0",
-		"react-native": "^0.50.1",
-		"react-native-elements": "^0.17.0",
-		"react-native-linea": "git://github.com/andrewnaeve/react-native-linea#LineaEmv",
+		"react-native": "^0.50.3",
+		"react-native-elements": "^0.18.0",
+		"react-native-linea": "git://github.com/andrewnaeve/react-native-linea#LineaEmv2",
 		"react-native-linear-gradient": "^2.3.0",
 		"react-native-vector-icons": "^4.4.2",
 		"react-navigation": "^1.0.0-beta.19",

@@ -23,7 +23,7 @@ class Linea extends Component {
 	}
 
 	debugListener = error => {
-		console.log('err', error);
+		console.log(error);
 	};
 
 	render() {

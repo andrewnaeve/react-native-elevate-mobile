@@ -1,5 +1,3 @@
-import './ReactotronConfig';
-import Reactotron from 'reactotron-react-native';
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { HomeScreen } from './src/nav/router';
