@@ -16,14 +16,28 @@ class Linea extends Component {
 		super();
 		this.mpos = new LineaMPos();
 		this.mpos.addDebugListener(this.debugListener);
+		this.mpos.addSmartCardInsertedListener(this.cardInsertedListener);
+		this.mpos.addTransactionStartedListener(this.transactionListener);
 	}
 
 	componentDidMount() {
-		this.mpos.emvInit();
+		this.mpos.initialize();
 	}
+
+	initSC = () => {
+		this.mpos.initSC();
+	};
 
 	debugListener = error => {
 		console.log(error);
+	};
+
+	cardInsertedListener = data => {
+		console.log(data);
+	};
+
+	transactionListener = data => {
+		console.log(data);
 	};
 
 	render() {
@@ -35,7 +49,11 @@ class Linea extends Component {
 		return (
 			<View style={backgroundColor}>
 				<View style={styles.body}>
-					<Text style={styles.text}> {connectionString} </Text>
+					<Text style={styles.text}>{lineaIsConnected}</Text>
+					<TouchableOpacity
+						onPress={this.initSC}
+						style={styles.button}
+					/>
 				</View>
 			</View>
 		);
@@ -61,6 +79,11 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center'
+	},
+	button: {
+		height: 60,
+		width: 150,
+		backgroundColor: 'white'
 	},
 	text: {
 		color: 'white',

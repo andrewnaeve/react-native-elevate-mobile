@@ -3849,9 +3849,9 @@ react-native-elements@^0.18.0:
     opencollective "^1.0.3"
     prop-types "^15.5.8"
 
-"react-native-linea@git://github.com/andrewnaeve/react-native-linea#LineaEmv2":
+"react-native-linea@git://github.com/andrewnaeve/react-native-linea":
   version "1.3.0"
-  resolved "git://github.com/andrewnaeve/react-native-linea#04a5b94857aafc425117bd636e99f8161220f233"
+  resolved "git://github.com/andrewnaeve/react-native-linea#74e350687d2cfdb94d7d2fa9df5f676394460bca"
 
 react-native-linear-gradient@^2.3.0:
   version "2.3.0"
