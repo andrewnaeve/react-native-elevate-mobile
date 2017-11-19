@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Button } from 'react-native-elements';
+import { lineaConnected } from '../../../redux/actions/lineaConnected';
 
 class Linea extends Component {
 	constructor() {
@@ -24,32 +24,29 @@ class Linea extends Component {
 		this.mpos.initialize();
 	}
 
-	initSC = () => {
-		this.mpos.initSC();
-	};
-
 	debugListener = error => {
-		console.log(error);
+		console.log('error:', error);
 	};
 
 	cardInsertedListener = data => {
 		console.log(data);
+		this.mpos.startTransaction();
 	};
 
 	transactionListener = data => {
-		console.log(data);
+		console.log('transaction listener', data);
 	};
 
 	render() {
-		const { lineaIsConnected } = this.props;
-		const connectionString = lineaIsConnected ? 'True' : 'False';
-		const backgroundColor = lineaIsConnected
+		const { lineaStatus } = this.props;
+		const connectionString = lineaStatus ? 'True' : 'False';
+		const backgroundColor = lineaStatus
 			? styles.containerGreen
 			: styles.containerRed;
 		return (
 			<View style={backgroundColor}>
 				<View style={styles.body}>
-					<Text style={styles.text}>{lineaIsConnected}</Text>
+					<Text style={styles.text}>{lineaStatus}</Text>
 					<TouchableOpacity
 						onPress={this.initSC}
 						style={styles.button}
@@ -60,8 +57,8 @@ class Linea extends Component {
 	}
 }
 
-const mapStateToProps = ({ lineaIsConnected }) => {
-	return { lineaIsConnected };
+const mapStateToProps = ({ lineaStatus }) => {
+	return { lineaStatus };
 };
 
 export default connect(mapStateToProps)(Linea);

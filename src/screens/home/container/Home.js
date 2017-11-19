@@ -6,22 +6,11 @@ import { bindActionCreators } from 'redux';
 import { assetNotReady } from '../../../redux/actions/assetNotReady';
 import { assetReady } from '../../../redux/actions/assetReady';
 import { appReady } from '../../../redux/actions/appReady';
-import { lineaConnected } from '../../../redux/actions/lineaConnected';
+
 import ElevateIcon from '../components/ElevateIcon';
 import PulseIcon from '../components/PulseIcon';
 
 class Home extends Component {
-	constructor() {
-		super();
-		this.mpos = new LineaMPos();
-		this.mpos.addConnectionStateListener(this.lineaConnectionStateListener);
-		this._isMounted = true;
-	}
-
-	componentDidMount() {
-		this.mpos.connect();
-	}
-
 	componentWillUnmount() {
 		const { assetNotReady } = this.props;
 		assetNotReady('elevate');
@@ -33,11 +22,6 @@ class Home extends Component {
 		const { appReady } = this.props;
 		elevate && pulse && appReady(true);
 	}
-
-	lineaConnectionStateListener = data => {
-		const { lineaConnected } = this.props;
-		lineaConnected(data);
-	};
 
 	handleElevateLoad = () => {
 		const { assetReady } = this.props;
@@ -81,7 +65,7 @@ const mapStateToProps = ({ assetsReady }) => {
 
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators(
-		{ assetNotReady, assetReady, appReady, lineaConnected },
+		{ assetNotReady, assetReady, appReady },
 		dispatch
 	);
 };

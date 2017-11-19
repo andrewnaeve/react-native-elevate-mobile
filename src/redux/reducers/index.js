@@ -1,12 +1,12 @@
 import { assetsReady } from './assetsReadyReducer';
 import { appIsReady } from './appIsReadyReducer';
-import { lineaIsConnected } from './lineaIsConnectedReducer';
+import { lineaStatus } from './lineaStatusReducer';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
 	assetsReady,
 	appIsReady,
-	lineaIsConnected
+	lineaStatus
 });
 
 export default rootReducer;
