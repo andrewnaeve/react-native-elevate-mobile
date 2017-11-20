@@ -9,7 +9,6 @@ import LineaStatus from './src/screens/loading/LineaStatus';
 
 export default class App extends Component {
 	render() {
-		console.log('hey dude');
 		return (
 			<Provider store={store}>
 				<View style={styles.container}>

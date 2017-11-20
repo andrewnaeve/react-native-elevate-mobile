@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Animated, Easing, StyleSheet } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { loadingAnimationComplete } from '../../redux/actions/loadingAnimationComplete';
 
 class Loading extends Component {
 	constructor() {
@@ -12,10 +13,18 @@ class Loading extends Component {
 		this.zoomAnimation = new Animated.Value(1);
 		this.opaqueAnimation = new Animated.Value(1);
 	}
-	componentDidMount() {}
+
 	componentWillReceiveProps(nextProps) {
 		const { appIsReady } = nextProps;
 		appIsReady && this.animate();
+	}
+
+	animationCompleted = () => {};
+
+	componentDidUpdate() {
+		const { loadingAnimationComplete } = this.props;
+		const { visible } = this.state;
+		!visible && loadingAnimationComplete(true);
 	}
 
 	animate = () => {
@@ -72,8 +81,10 @@ class Loading extends Component {
 const mapStateToProps = ({ appIsReady }) => {
 	return { appIsReady };
 };
-
-export default connect(mapStateToProps)(Loading);
+const mapDispatchToProps = dispatch => {
+	return bindActionCreators({ loadingAnimationComplete }, dispatch);
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Loading);
 
 const styles = StyleSheet.create({
 	container: {

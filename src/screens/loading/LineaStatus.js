@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LineaPro, LineaMPos } from 'react-native-linea';
+import { LineaMPos } from 'react-native-linea';
 import { Animated, Easing, StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -9,58 +9,57 @@ import { width } from '../../utils/styleConstants';
 class LineaStatus extends Component {
 	constructor() {
 		super();
-		this.mpos = new LineaMPos();
-		this.mpos.addConnectionStateListener(this.lineaConnectionStateListener);
-		this.drawerAnimation = new Animated.Value(0);
+		this.alertAnimation = new Animated.Value(0);
+		this.textOpacity = new Animated.Value(0);
 	}
 
-	componentDidMount() {
-		this.mpos.connect();
-	}
-
-	lineaConnectionStateListener = data => {
-		console.log('data', data);
-		const { lineaConnected } = this.props;
-		lineaConnected(data);
-	};
-
-	componentDidMount() {
-		this.openDrawer();
-	}
-
-	componentWillReceiveProps(nextProps) {
+	componentWillReceiveProps(nextProps, nextState) {
 		const { lineaStatus } = this.props;
-		console.log('ls', lineaStatus, nextProps.lineaStatus);
+		const { loadingAnimationComplete } = nextProps;
+		const nextStatus = nextProps.lineaStatus;
 		if (lineaStatus !== nextProps.lineaStatus) {
-			console.log('close it');
-			this.closeDrawer();
+			loadingAnimationComplete && this.showAlert();
 		}
 	}
 
-	openDrawer = () => {
-		this.drawerAnimation.setValue(0);
-		Animated.timing(this.drawerAnimation, {
-			toValue: 25,
-			duration: 1000,
-			easing: Easing.ease
-		}).start();
-	};
-
-	closeDrawer = () => {
-		this.drawerAnimation.setValue(25);
-		Animated.timing(this.drawerAnimation, {
-			toValue: 0,
-			duration: 1000,
-			easing: Easing.ease
-		}).start(() => this.openDrawer);
+	showAlert = () => {
+		const { lineaStatus } = this.props;
+		this.alertAnimation.setValue(0);
+		this.textOpacity.setValue(0);
+		Animated.stagger(2000, [
+			Animated.parallel([
+				Animated.timing(this.alertAnimation, {
+					toValue: 25,
+					duration: 300,
+					easing: Easing.easeInBounce
+				}),
+				Animated.timing(this.textOpacity, {
+					toValue: 1,
+					duration: 300
+				})
+			]),
+			Animated.parallel([
+				Animated.timing(this.alertAnimation, {
+					toValue: 0,
+					duration: 300,
+					easing: Easing.easeOutBounce
+				}),
+				Animated.timing(this.textOpacity, {
+					toValue: 0,
+					duration: 300
+				})
+			])
+		]).start();
 	};
 
 	render() {
 		const { lineaStatus } = this.props;
-		console.log('prop', this.props);
 		const backgroundColor = lineaStatus === 'connected' ? 'green' : 'red';
-		const hidden = lineaStatus === 'connected';
-		const drawer = this.drawerAnimation.interpolate({
+		const drawer = this.alertAnimation.interpolate({
+			inputRange: [0, 1],
+			outputRange: [0, 1]
+		});
+		const opacity = this.textOpacity.interpolate({
 			inputRange: [0, 1],
 			outputRange: [0, 1]
 		});
@@ -72,32 +71,33 @@ class LineaStatus extends Component {
 					{ backgroundColor: backgroundColor }
 				]}
 			>
-				<Text>Disconnected</Text>
+				<Animated.Text style={[styles.text, { opacity: opacity }]}>
+					{lineaStatus}
+				</Animated.Text>
 			</Animated.View>
 		);
 	}
 }
-
+//<Text style={[styles.text]}>{lineaStatus}</Text>
 const styles = StyleSheet.create({
 	linea: {
 		position: 'absolute',
-		zIndex: 1,
 		top: 20,
 		left: 0,
 		right: 0,
-		width: width,
 		height: 0,
+		width: width,
 		alignItems: 'center',
-		justifyContent: 'center'
+		justifyContent: 'center',
+		zIndex: 1
+	},
+	text: {
+		backgroundColor: 'transparent'
 	}
 });
 
-const mapStateToProps = ({ lineaStatus }) => {
-	return { lineaStatus };
+const mapStateToProps = ({ lineaStatus, loadingAnimationComplete }) => {
+	return { lineaStatus, loadingAnimationComplete };
 };
 
-const mapDispatchToProps = dispatch => {
-	return bindActionCreators({ lineaConnected }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LineaStatus);
+export default connect(mapStateToProps)(LineaStatus);
