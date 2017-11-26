@@ -1,11 +1,11 @@
-import { SHOW_OVERLAY } from '../actions/overlay';
+import { SHOW_MODAL } from '../actions/modal';
 
 import initialState from '../initialState';
 
-export const showOverlay = (state = initialState.showOverlay, action) => {
+export const showModal = (state = initialState.showModal, action) => {
 	const show = action.payload;
 	switch (action.type) {
-		case SHOW_OVERLAY:
+		case SHOW_MODAL:
 			return show;
 		default:
 			return state;

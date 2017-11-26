@@ -22,6 +22,7 @@
 		"eslint": "^4.9.0",
 		"eslint-plugin-react": "^7.4.0",
 		"eslint-plugin-react-native": "^3.1.0",
+		"lottie-react-native": "2.2.7",
 		"react": "^16.0.0",
 		"react-native": "^0.50.3",
 		"react-native-elements": "^0.18.0",

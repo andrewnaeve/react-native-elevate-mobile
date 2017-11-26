@@ -4,7 +4,7 @@ const initialState = {
 	lineaStatus: 'disconnected',
 	loadingAnimationComplete: false,
 	balance: 0,
-	showOverlay: false
+	showModal: false
 };
 
 export default initialState;
