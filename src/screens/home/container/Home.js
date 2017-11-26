@@ -17,7 +17,7 @@ class Home extends Component {
 		this.mpos.addConnectionStateListener(this.lineaConnectionStateListener);
 	}
 
-	async componentDidMount() {
+	componentDidMount() {
 		this.mpos.connect();
 	}
 

@@ -10,10 +10,15 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { lineaConnected } from '../../../redux/actions/lineaConnected';
+import Counter from '../components/Counter';
+import CheckoutButton from '../components/CheckoutButton';
 
-class Linea extends Component {
+class Cash extends Component {
 	constructor() {
 		super();
+		this.state = {
+			showModal: false
+		};
 		this.mpos = new LineaMPos();
 		this.mpos.addDebugListener(this.debugListener);
 		this.mpos.addSmartCardInsertedListener(this.cardInsertedListener);
@@ -38,19 +43,11 @@ class Linea extends Component {
 	};
 
 	render() {
-		const { lineaStatus } = this.props;
-		const connectionString = lineaStatus ? 'True' : 'False';
-		const backgroundColor = lineaStatus
-			? styles.containerGreen
-			: styles.containerRed;
 		return (
-			<View style={backgroundColor}>
-				<View style={styles.body}>
-					<Text style={styles.text}>{lineaStatus}</Text>
-					<TouchableOpacity
-						onPress={this.initSC}
-						style={styles.button}
-					/>
+			<View style={styles.container}>
+				<Counter />
+				<View style={styles.flex}>
+					<CheckoutButton />
 				</View>
 			</View>
 		);
@@ -61,35 +58,18 @@ const mapStateToProps = ({ lineaStatus }) => {
 	return { lineaStatus };
 };
 
-export default connect(mapStateToProps)(Linea);
+export default connect(mapStateToProps)(Cash);
 
 const styles = StyleSheet.create({
-	containerRed: {
+	container: {
 		flex: 1,
-		backgroundColor: 'red'
-	},
-	containerGreen: {
-		flex: 1,
-		backgroundColor: 'green'
-	},
-	body: {
-		flex: 1,
-		justifyContent: 'center',
+		paddingTop: 25,
+		backgroundColor: 'white',
 		alignItems: 'center'
 	},
-	button: {
-		height: 60,
-		width: 150,
-		backgroundColor: 'white'
-	},
-	text: {
-		color: 'white',
-		fontSize: 60,
-		fontFamily: 'Helvetica Neue'
-	},
-	scanButton: {
+	flex: {
+		flex: 1,
 		justifyContent: 'flex-end',
-		alignSelf: 'center',
-		marginBottom: 20
+		marginBottom: 50
 	}
 });

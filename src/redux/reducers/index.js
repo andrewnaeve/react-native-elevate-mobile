@@ -1,14 +1,18 @@
+import { combineReducers } from 'redux';
 import { assetsReady } from './assetsReadyReducer';
 import { appIsReady } from './appIsReadyReducer';
 import { lineaStatus } from './lineaStatusReducer';
+import { balance } from './balanceReducer';
+import { showOverlay } from './overlayReducer';
 import { loadingAnimationComplete } from './loadingAnimationCompleteReducer';
-import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
 	assetsReady,
 	appIsReady,
 	lineaStatus,
-	loadingAnimationComplete
+	balance,
+	loadingAnimationComplete,
+	showOverlay
 });
 
 export default rootReducer;

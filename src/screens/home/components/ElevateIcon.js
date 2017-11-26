@@ -17,7 +17,8 @@ class Elevate extends Component {
 		Animated.timing(this.animateElevate, {
 			toValue: 0.85,
 			duration: 100,
-			easing: Easing.ease
+			easing: Easing.ease,
+			useNativeDriver: true
 		}).start();
 	};
 
@@ -26,7 +27,8 @@ class Elevate extends Component {
 		Animated.timing(this.animateElevate, {
 			toValue: 1,
 			duration: 100,
-			easing: Easing.ease
+			easing: Easing.ease,
+			useNativeDriver: true
 		}).start(() => navigate('Elevate'));
 	};
 

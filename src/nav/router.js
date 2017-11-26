@@ -2,7 +2,7 @@ import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import Home from '../screens/home/container/Home';
 import PulseReader from '../screens/nfc/container/PulseReader';
-import Linea from '../screens/linea/container/Linea';
+import Cash from '../screens/addCash/container/CashContainer';
 
 export const HomeScreen = StackNavigator(
 	{
@@ -10,7 +10,7 @@ export const HomeScreen = StackNavigator(
 			screen: Home
 		},
 		Elevate: {
-			screen: Linea
+			screen: Cash
 		},
 		Pulse: {
 			screen: PulseReader
