@@ -10,6 +10,9 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { lineaConnected } from '../../../redux/actions/lineaConnected';
+import { cardInserted } from '../../../redux/actions/cardInserted';
+import { transactionSuccess } from '../../../redux/actions/transactionSuccess';
+
 import Counter from '../components/Counter';
 import CheckoutButton from '../components/CheckoutButton';
 
@@ -23,6 +26,9 @@ class Cash extends Component {
 		this.mpos.addDebugListener(this.debugListener);
 		this.mpos.addSmartCardInsertedListener(this.cardInsertedListener);
 		this.mpos.addTransactionStartedListener(this.transactionListener);
+		this.mpos.addTransactionFinishedListener(
+			this.transactionFinishedListener
+		);
 	}
 
 	componentDidMount() {
@@ -35,11 +41,23 @@ class Cash extends Component {
 
 	cardInsertedListener = data => {
 		console.log(data);
+		this.props.cardInserted(true);
 		this.mpos.startTransaction();
 	};
 
 	transactionListener = data => {
 		console.log('transaction listener', data);
+	};
+
+	transactionFinishedListener = data => {
+		const { transactionSuccess } = this.props;
+		this.props.cardInserted(false);
+		if (data === 'success') {
+			transactionSuccess(true);
+		} else if (data === 'failure') {
+			transactionSuccess(false);
+		}
+		console.log('transaction Finished Listener', data);
 	};
 
 	render() {
@@ -58,7 +76,11 @@ const mapStateToProps = ({ lineaStatus }) => {
 	return { lineaStatus };
 };
 
-export default connect(mapStateToProps)(Cash);
+const mapDispatchToProps = dispatch => {
+	return bindActionCreators({ cardInserted, transactionSuccess }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cash);
 
 const styles = StyleSheet.create({
 	container: {

@@ -4,7 +4,10 @@ const initialState = {
 	lineaStatus: 'disconnected',
 	loadingAnimationComplete: false,
 	balance: 0,
-	showModal: false
+	checkout: {
+		showModal: false,
+		cardInserted: false
+	}
 };
 
 export default initialState;

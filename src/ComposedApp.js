@@ -4,7 +4,7 @@ import { HomeScreen } from './nav/router';
 import Loading from './screens/loading/Loading';
 import { LineaMPos } from 'react-native-linea';
 import LineaStatus from './screens/loading/LineaStatus';
-import Overlay from './modals/Overlay';
+import Overlay from './modals/container/Overlay';
 
 export default class ComposedApp extends Component {
 	render() {

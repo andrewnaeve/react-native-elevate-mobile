@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -48,8 +47,8 @@
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B1951B9A1C6F4844B53509ED /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 706C1223202C4F15BEA39131 /* Zocial.ttf */; };
 		B493297C3E0F4B85AF902AC5 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06106CCEA26D4DDABFF3B63E /* Feather.ttf */; };
-		BCA275EB1FCB69F20059A16F /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCA275711FCB683C0059A16F /* Lottie.framework */; };
-		BCA275EC1FCB69F20059A16F /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BCA275711FCB683C0059A16F /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BCA276211FCB77840059A16F /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCA275711FCB683C0059A16F /* Lottie.framework */; };
+		BCA276221FCB77840059A16F /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BCA275711FCB683C0059A16F /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BCC6C1E61F9D386300FDECC4 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCC6C1DB1F9D386200FDECC4 /* Entypo.ttf */; };
 		BCC6C1E71F9D386300FDECC4 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCC6C1DC1F9D386200FDECC4 /* EvilIcons.ttf */; };
 		BCC6C1E81F9D386300FDECC4 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCC6C1DD1F9D386200FDECC4 /* Feather.ttf */; };
@@ -329,7 +328,7 @@
 			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
 			remoteInfo = LottieReactNative;
 		};
-		BCA275ED1FCB69F20059A16F /* PBXContainerItemProxy */ = {
+		BCA276231FCB77840059A16F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3741765680E6448996EED026 /* Lottie.xcodeproj */;
 			proxyType = 1;
@@ -395,13 +394,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		BCA276171FCB69F30059A16F /* Embed Frameworks */ = {
+		BCA276251FCB77840059A16F /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BCA275EC1FCB69F20059A16F /* Lottie.framework in Embed Frameworks */,
+				BCA276221FCB77840059A16F /* Lottie.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,7 +483,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
-				BCA275EB1FCB69F20059A16F /* Lottie.framework in Frameworks */,
+				BCA276211FCB77840059A16F /* Lottie.framework in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
@@ -863,12 +862,12 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				BCA276171FCB69F30059A16F /* Embed Frameworks */,
+				BCA276251FCB77840059A16F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				BCA275EE1FCB69F20059A16F /* PBXTargetDependency */,
+				BCA276241FCB77840059A16F /* PBXTargetDependency */,
 			);
 			name = ElevateMobile;
 			productName = "Hello World";
@@ -1494,10 +1493,10 @@
 			target = 2D02E47A1E0B4A5D006451C7 /* ElevateMobile-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
-		BCA275EE1FCB69F20059A16F /* PBXTargetDependency */ = {
+		BCA276241FCB77840059A16F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Lottie_iOS;
-			targetProxy = BCA275ED1FCB69F20059A16F /* PBXContainerItemProxy */;
+			targetProxy = BCA276231FCB77840059A16F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

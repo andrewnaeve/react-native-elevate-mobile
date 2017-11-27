@@ -3,7 +3,7 @@ import { assetsReady } from './assetsReadyReducer';
 import { appIsReady } from './appIsReadyReducer';
 import { lineaStatus } from './lineaStatusReducer';
 import { balance } from './balanceReducer';
-import { showModal } from './modalReducer';
+import { checkout } from './checkoutReducer';
 import { loadingAnimationComplete } from './loadingAnimationCompleteReducer';
 
 const rootReducer = combineReducers({
@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
 	lineaStatus,
 	balance,
 	loadingAnimationComplete,
-	showModal
+	checkout
 });
 
 export default rootReducer;

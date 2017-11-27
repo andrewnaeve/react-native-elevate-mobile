@@ -24,7 +24,7 @@
 		"eslint-plugin-react-native": "^3.1.0",
 		"lottie-react-native": "2.2.7",
 		"react": "^16.0.0",
-		"react-native": "^0.50.3",
+		"react-native": "0.50.3",
 		"react-native-elements": "^0.18.0",
 		"react-native-linea": "git://github.com/andrewnaeve/react-native-linea",
 		"react-native-linear-gradient": "^2.3.0",

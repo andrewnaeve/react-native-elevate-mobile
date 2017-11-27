@@ -5,11 +5,15 @@ import { connect } from 'react-redux';
 import { LineaPro, LineaMPos } from 'react-native-linea';
 import { addBalance } from '../../../redux/actions/addBalance';
 import { subtractBalance } from '../../../redux/actions/subtractBalance';
+import { launchModal } from '../../../redux/actions/modal';
 import { width, height } from '../../../utils/styleConstants';
 import { Button, Icon } from 'react-native-elements';
 
 class CheckoutButton extends Component {
-	handleCheckout = () => {};
+	beginCheckout = () => {
+		const { launchModal } = this.props;
+		launchModal(true);
+	};
 	render() {
 		return (
 			<Button
@@ -23,6 +27,7 @@ class CheckoutButton extends Component {
 					type: 'font-awesome'
 				}}
 				title="CHECKOUT"
+				onPress={this.beginCheckout}
 			/>
 		);
 	}
@@ -33,7 +38,10 @@ const mapStateToProps = ({ balance }) => {
 };
 
 const mapDispatchToProps = dispatch => {
-	return bindActionCreators({ addBalance, subtractBalance }, dispatch);
+	return bindActionCreators(
+		{ addBalance, subtractBalance, launchModal },
+		dispatch
+	);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutButton);

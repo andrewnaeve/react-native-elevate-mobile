@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, View, ActivityIndicator } from 'react-native';
-import { width, height } from '../utils/styleConstants';
+import { width, height } from '../../utils/styleConstants';
 import Card from './Card';
 
-export default (PresentCardModal = () => (
+export default (PresentCardModal = props => (
 	<Card>
 		<Text style={styles.header}>Insert Card</Text>
 		<View style={styles.cardWrapper}>
@@ -15,7 +15,13 @@ export default (PresentCardModal = () => (
 			</View>
 		</View>
 		<View style={styles.activity}>
-			<ActivityIndicator animating={true} size="large" color="#00b3ff" />
+			{props.cardInserted && (
+				<ActivityIndicator
+					animating={true}
+					size="large"
+					color="#00b3ff"
+				/>
+			)}
 		</View>
 	</Card>
 ));
@@ -23,7 +29,7 @@ export default (PresentCardModal = () => (
 const styles = StyleSheet.create({
 	header: {
 		fontSize: 35,
-		marginTop: 10,
+		marginTop: 20,
 		fontWeight: '600',
 		alignSelf: 'center',
 		backgroundColor: 'transparent'

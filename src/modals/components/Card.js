@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { width, height } from '../utils/styleConstants';
+import { width, height } from '../../utils/styleConstants';
 
 const Card = props => <View style={styles.container}>{props.children}</View>;
 

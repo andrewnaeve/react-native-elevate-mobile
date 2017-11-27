@@ -1,7 +1,7 @@
-export const SHOW_MODAL = 'SHOW_MODAL';
+export const LAUNCH_MODAL = 'LAUNCH_MODAL';
 
-export const showModal = show => {
+export const launchModal = show => {
 	return dispatch => {
-		dispatch({ type: SHOW_MODAL, payload: show });
+		dispatch({ type: LAUNCH_MODAL, payload: show });
 	};
 };
