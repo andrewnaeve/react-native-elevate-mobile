@@ -3,7 +3,8 @@ import { StackNavigator } from 'react-navigation';
 import Home from '../screens/home/container/Home';
 import PulseReader from '../screens/nfc/container/PulseReader';
 import Cash from '../screens/addCash/container/CashContainer';
-import TagWrite from '../screens/TagWriter/container/TagWriter';
+import TagWrite from '../screens/nfc/containers/Write';
+
 export const HomeScreen = StackNavigator(
 	{
 		Home: {
