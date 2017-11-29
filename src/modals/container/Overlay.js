@@ -68,11 +68,16 @@ class Overlay extends Component {
 		}
 	};
 	closeModal = () => {
-		this.props.launchModal(false);
+		const { launchModal, navigation: { navigate } } = this.props;
+		this.setState({
+			slide: 0,
+			hide: true
+		});
+		launchModal(false);
+		navigate('Write');
 	};
 	render() {
-		const { showModal, cardInserted } = this.props;
-		console.log(showModal, 'asadm');
+		const { showModal, cardInserted, navigation } = this.props;
 		const { slide, hide } = this.state;
 		return (
 			<Modal

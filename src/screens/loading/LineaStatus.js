@@ -92,7 +92,8 @@ const styles = StyleSheet.create({
 		zIndex: 1
 	},
 	text: {
-		backgroundColor: 'transparent'
+		backgroundColor: 'transparent',
+		color: 'white'
 	}
 });
 

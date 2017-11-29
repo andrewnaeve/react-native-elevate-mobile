@@ -12,7 +12,7 @@ import { bindActionCreators } from 'redux';
 import { lineaConnected } from '../../../redux/actions/lineaConnected';
 import { cardInserted } from '../../../redux/actions/cardInserted';
 import { transactionSuccess } from '../../../redux/actions/transactionSuccess';
-
+import Overlay from '../../../modals/container/Overlay';
 import Counter from '../components/Counter';
 import CheckoutButton from '../components/CheckoutButton';
 
@@ -67,6 +67,7 @@ class Cash extends Component {
 				<View style={styles.flex}>
 					<CheckoutButton />
 				</View>
+				<Overlay navigation={this.props.navigation} />
 			</View>
 		);
 	}
