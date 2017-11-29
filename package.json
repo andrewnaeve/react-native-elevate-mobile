@@ -9,7 +9,7 @@
 	},
 	"scripts": {
 		"nuke": "watchman watch-del-all && rm -rf node_modules && rm -fr $TMPDIR/react-* && yarn && react-native link",
-		"linea": "yarn add git://github.com/andrewnaeve/react-native-linea",
+		"linea": "yarn add git://github.com/andrewnaeve/react-native-linea#mifare",
 		"android": "react-native run-android",
 		"ios": "react-native run-ios",
 		"test": "node node_modules/jest/bin/jest.js --watch"
@@ -26,7 +26,7 @@
 		"react": "^16.0.0",
 		"react-native": "0.50.3",
 		"react-native-elements": "^0.18.0",
-		"react-native-linea": "git://github.com/andrewnaeve/react-native-linea",
+		"react-native-linea": "git://github.com/andrewnaeve/react-native-linea#mifare",
 		"react-native-linear-gradient": "^2.3.0",
 		"react-native-vector-icons": "^4.4.2",
 		"react-navigation": "^1.0.0-beta.19",

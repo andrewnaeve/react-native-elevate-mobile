@@ -3,7 +3,7 @@ import { StackNavigator } from 'react-navigation';
 import Home from '../screens/home/container/Home';
 import PulseReader from '../screens/nfc/container/PulseReader';
 import Cash from '../screens/addCash/container/CashContainer';
-import TagWrite from '../screens/nfc/containers/Write';
+import WriteNFC from '../screens/nfc/containers/WriteNFC';
 
 export const HomeScreen = StackNavigator(
 	{
@@ -16,8 +16,8 @@ export const HomeScreen = StackNavigator(
 		Pulse: {
 			screen: PulseReader
 		},
-		TagWriter: {
-			screen: TagWriter
+		WriteNFC: {
+			screen: WriteNFC
 		}
 	},
 	{

@@ -74,7 +74,7 @@ class Overlay extends Component {
 			hide: true
 		});
 		launchModal(false);
-		navigate('Write');
+		navigate('WriteNFC');
 	};
 	render() {
 		const { showModal, cardInserted, navigation } = this.props;
