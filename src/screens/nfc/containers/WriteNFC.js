@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { LineaMPos } from 'react-native-linea';
-import { View, TouchableWithoutFeedback, StyleSheet } from 'react-native';
+import { AlertIOS, View, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { height, width } from '../../../utils/styleConstants';
 import { Button } from 'react-native-elements';
 
-class WriteNFC extends Component {
+export default class WriteNFC extends Component {
 	constructor() {
 		super();
 		this.mpos = new LineaMPos();
@@ -14,27 +14,47 @@ class WriteNFC extends Component {
 	}
 
 	componentDidMount() {
+		this.mpos.deinitializeEmv();
 		this.mpos.initRf();
 	}
 
 	rfCardDetectedListener = data => {
-		console.log(data);
+		const { balance } = this.props;
+		const stringBalance = balance.toString();
+		AlertIOS.prompt(
+			`Write $${balance}?`,
+			`Write $${balance} to wristband?`,
+			[
+				{
+					text: 'Cancel',
+					onPress: () => console.log('cancel'),
+					style: 'cancel'
+				},
+				{
+					text: 'Ok',
+					onPress: () => this.mpos.writeRf(stringBalance);
+				}
+			]
+		)
+	};
+
+	read = () => {
+		this.mpos.readRf();
 	};
 
 	render() {
 		const { navigation } = this.props;
 		return (
 			<View style={styles.container}>
+				<View style={styles.body} />
 				<Button
+					onPress={this.read}
 					raised
 					large
-					buttonStyle={{
-						backgroundColor: '#954646',
-						borderRadius: 10
-					}}
+					buttonStyle={styles.button}
 					style={styles.scanButton}
 					icon={{ name: 'settings-remote', type: 'MaterialIcons' }}
-					title="Write Credentials to Card"
+					title="Read"
 				/>
 			</View>
 		);
@@ -47,18 +67,24 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: 'white'
+	},
+	body: { flex: 1 },
+	button: {
+		marginBottom: 20,
+		backgroundColor: '#954646',
+		borderRadius: 10
 	}
 });
 
-const mapStateToProps = ({ assetsReady, loadingAnimationComplete }) => {
-	return { assetsReady, loadingAnimationComplete };
+const mapStateToProps = ({ balance }) => {
+	return { balance };
 };
 
-const mapDispatchToProps = dispatch => {
-	return bindActionCreators(
-		{ assetNotReady, assetReady, appReady, lineaConnected },
-		dispatch
-	);
-};
+// const mapDispatchToProps = dispatch => {
+// 	return bindActionCreators(
+// 		{ assetNotReady, assetReady, appReady, lineaConnected },
+// 		dispatch
+// 	);
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(WriteNFC);
+export default connect(mapStateToProps)(WriteNFC);

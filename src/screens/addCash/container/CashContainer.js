@@ -32,7 +32,7 @@ class Cash extends Component {
 	}
 
 	componentDidMount() {
-		this.mpos.initialize();
+		this.mpos.initializeEmv();
 	}
 
 	debugListener = error => {

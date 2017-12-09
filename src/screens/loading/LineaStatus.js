@@ -29,7 +29,7 @@ class LineaStatus extends Component {
 		Animated.stagger(2000, [
 			Animated.parallel([
 				Animated.timing(this.alertAnimation, {
-					toValue: 30,
+					toValue: 35,
 					duration: 200,
 					easing: Easing.ease
 				}),
@@ -56,8 +56,8 @@ class LineaStatus extends Component {
 		const { lineaStatus } = this.props;
 		const backgroundColor = lineaStatus === 'connected' ? 'green' : 'red';
 		const drawer = this.alertAnimation.interpolate({
-			inputRange: [0, 30],
-			outputRange: [0, 30]
+			inputRange: [0, 35],
+			outputRange: [0, 35]
 		});
 		const opacity = this.textOpacity.interpolate({
 			inputRange: [0, 1],
