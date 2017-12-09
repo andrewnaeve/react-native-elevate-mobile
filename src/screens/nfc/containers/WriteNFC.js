@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { LineaMPos } from 'react-native-linea';
-import { AlertIOS, View, TouchableWithoutFeedback, StyleSheet } from 'react-native';
+import {
+	AlertIOS,
+	View,
+	TouchableWithoutFeedback,
+	StyleSheet
+} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { height, width } from '../../../utils/styleConstants';
 import { Button } from 'react-native-elements';
 
-export default class WriteNFC extends Component {
+class WriteNFC extends Component {
 	constructor() {
 		super();
 		this.mpos = new LineaMPos();
@@ -21,21 +26,28 @@ export default class WriteNFC extends Component {
 	rfCardDetectedListener = data => {
 		const { balance } = this.props;
 		const stringBalance = balance.toString();
-		AlertIOS.prompt(
+		console.log('detected', data);
+		AlertIOS.alert(
 			`Write $${balance}?`,
-			`Write $${balance} to wristband?`,
+			`Would you like to add $${balance} to wristband?`,
 			[
 				{
 					text: 'Cancel',
-					onPress: () => console.log('cancel'),
+					onPress: () => console.log('Cancel Pressed'),
 					style: 'cancel'
 				},
 				{
-					text: 'Ok',
-					onPress: () => this.mpos.writeRf(stringBalance);
+					text: 'Write Now',
+					onPress: () => this.mpos.writeRf(stringBalance)
 				}
 			]
-		)
+		);
+	};
+
+	write = () => {
+		const { balance } = this.props;
+		const stringBalance = balance.toString();
+		this.mpos.writeRf(stringBalance);
 	};
 
 	read = () => {

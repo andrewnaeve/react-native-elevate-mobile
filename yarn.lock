@@ -3868,7 +3868,7 @@ react-native-elements@^0.18.0:
 
 "react-native-linea@git://github.com/andrewnaeve/react-native-linea#mifare":
   version "1.3.0"
-  resolved "git://github.com/andrewnaeve/react-native-linea#9324ce7ee0256f67e5fe8195688406d60ad3d14e"
+  resolved "git://github.com/andrewnaeve/react-native-linea#468ecacf7f8f39b6d70f88618f0ea91e860ba780"
 
 react-native-linear-gradient@^2.3.0:
   version "2.3.0"
