@@ -5,27 +5,36 @@ import { bindActionCreators } from 'redux';
 import { width, height } from '../../utils/styleConstants';
 import PresentCardModal from '../components/PresentCardModal';
 import SuccessModal from '../components/SuccessModal';
+import Receipt from '../components/Receipt';
 import { cardInserted } from '../../redux/actions/cardInserted';
 import { launchModal } from '../../redux/actions/modal';
+import { LineaMPos } from 'react-native-linea';
 
 class Overlay extends Component {
 	constructor() {
 		super();
 		this.state = {
 			slide: 0,
-			hide: true
+			hide: true,
+			receipt: ''
 		};
+		this.mpos = new LineaMPos();
 		this.presentCard = new Animated.Value(500);
-		this.slides = ['PresentCard', 'Success'];
+		this.mpos.addReceiptListener(this.receiptListener);
+		this.slides = ['PresentCard', 'Success', 'receipt'];
 	}
+
 	componentWillReceiveProps(nextProps) {
-		const { transactionSuccess } = nextProps;
+		const { transactionSuccess, showModal } = nextProps;
 		if (
 			transactionSuccess === true &&
 			transactionSuccess !== this.props.transactionSuccess
 		) {
 			this.slideOut();
 		}
+		// if (showModal === false && showModal !== this.props.showModal) {
+
+		// }
 	}
 	componentDidUpdate(prevProps, prevState) {
 		const { hide, slide } = this.state;
@@ -36,6 +45,11 @@ class Overlay extends Component {
 			this.setState({ hide: false });
 		}
 	}
+	receiptListener = data => {
+		this.setState({
+			receipt: data
+		});
+	};
 	handleModalLoad = () => {
 		this.setState({
 			hide: false
@@ -61,30 +75,34 @@ class Overlay extends Component {
 	};
 	handleTransition = () => {
 		if (this.props.transactionSuccess === true) {
-			this.setState({
-				hide: true,
-				slide: 1
-			});
+			this.setState(({ hide, slide }) => ({
+				hide: !hide,
+				slide: (slide += 1)
+			}));
 		}
 	};
 	closeModal = () => {
-		const { launchModal, navigation: { navigate } } = this.props;
+		const { launchModal } = this.props;
 		this.setState({
 			slide: 0,
 			hide: true
 		});
 		launchModal(false);
-		navigate('WriteNFC');
 	};
 	render() {
-		const { showModal, cardInserted, navigation } = this.props;
-		const { slide, hide } = this.state;
+		const {
+			showModal,
+			cardInserted,
+			navigation: { navigate }
+		} = this.props;
+		const { slide, hide, receipt } = this.state;
 		return (
 			<Modal
 				visible={showModal}
 				animationType="fade"
 				transparent={true}
 				onShow={this.handleModalLoad}
+				onDismiss={() => navigate('WriteNFC')}
 			>
 				<View style={styles.wrapper}>
 					<View style={styles.Modal} />
@@ -115,6 +133,24 @@ class Overlay extends Component {
 						>
 							<SuccessModal
 								currentSlide={slide}
+								closeModal={this.slideOut}
+							/>
+						</Animated.View>
+					)}
+					{this.slides[slide] === 'receipt' && (
+						<Animated.View
+							style={[
+								{
+									transform: [
+										{ translateY: this.presentCard }
+									]
+								},
+								hide && styles.hide
+							]}
+						>
+							<Receipt
+								currentSlide={slide}
+								receipt={receipt}
 								closeModal={this.closeModal}
 							/>
 						</Animated.View>

@@ -4,7 +4,8 @@ import {
 	AlertIOS,
 	View,
 	TouchableWithoutFeedback,
-	StyleSheet
+	StyleSheet,
+	Text
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -15,7 +16,10 @@ class WriteNFC extends Component {
 	constructor() {
 		super();
 		this.mpos = new LineaMPos();
-		this.mpos.addRfCardDetectedListener(this.rfCardDetectedListener);
+		this.cl = this.mpos.addRfCardDetectedListener(
+			this.rfCardDetectedListener
+		);
+		this.writeToCard = this.writeToCard.bind(this);
 	}
 
 	componentDidMount() {
@@ -23,10 +27,21 @@ class WriteNFC extends Component {
 		this.mpos.initRf();
 	}
 
-	rfCardDetectedListener = data => {
+	componentWillUnmount() {
+		console.log('unmounted');
+		this.mpos.closeRf();
+		this.cl.remove();
+	}
+
+	async writeToCard() {
 		const { balance } = this.props;
 		const stringBalance = balance.toString();
-		console.log('detected', data);
+
+		await this.mpos.writeRf(stringBalance);
+		this.mpos.closeRf();
+	}
+	rfCardDetectedListener = data => {
+		const { balance } = this.props;
 		AlertIOS.alert(
 			`Write $${balance}?`,
 			`Would you like to add $${balance} to wristband?`,
@@ -37,8 +52,8 @@ class WriteNFC extends Component {
 					style: 'cancel'
 				},
 				{
-					text: 'Write Now',
-					onPress: () => this.mpos.writeRf(stringBalance)
+					text: 'Write',
+					onPress: () => this.writeToCard()
 				}
 			]
 		);
@@ -50,23 +65,23 @@ class WriteNFC extends Component {
 		this.mpos.writeRf(stringBalance);
 	};
 
-	read = () => {
-		this.mpos.readRf();
-	};
-
 	render() {
-		const { navigation } = this.props;
+		const { navigation: { navigate } } = this.props;
 		return (
 			<View style={styles.container}>
-				<View style={styles.body} />
+				<View style={styles.body}>
+					<Text style={styles.text}>Tap wristband to load</Text>
+				</View>
 				<Button
-					onPress={this.read}
-					raised
+					style={styles.button}
+					borderRadius={5}
 					large
-					buttonStyle={styles.button}
-					style={styles.scanButton}
-					icon={{ name: 'settings-remote', type: 'MaterialIcons' }}
-					title="Read"
+					backgroundColor="#009d00"
+					icon={{
+						name: 'shopping-cart',
+						type: 'font-awesome'
+					}}
+					title="New Transaction?"
 				/>
 			</View>
 		);
@@ -80,7 +95,13 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		backgroundColor: 'white'
 	},
-	body: { flex: 1 },
+	body: {
+		flex: 1,
+		justifyContent: 'center'
+	},
+	text: {
+		fontSize: 20
+	},
 	button: {
 		marginBottom: 20,
 		backgroundColor: '#954646',
