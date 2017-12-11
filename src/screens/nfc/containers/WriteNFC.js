@@ -72,17 +72,6 @@ class WriteNFC extends Component {
 				<View style={styles.body}>
 					<Text style={styles.text}>Tap wristband to load</Text>
 				</View>
-				<Button
-					style={styles.button}
-					borderRadius={5}
-					large
-					backgroundColor="#009d00"
-					icon={{
-						name: 'shopping-cart',
-						type: 'font-awesome'
-					}}
-					title="New Transaction?"
-				/>
 			</View>
 		);
 	}
